@@ -17,7 +17,7 @@ This also means that Rasp Pi can be a great development environment for anyone g
 
 Next step was to get the Rasp Pi driving the car. After installing the default Java JVM (open jdk), I got the camera streaming to the board - the screen shot you can see here is live video from an android phone for the self-driving car... woo!
 
-<img class="alignright" src="http://blog.davidsingleton.org/wp-content/uploads/2012/03/IMG_20120304_232938.jpg" alt="screenshot" />
+<img src="http://blog.davidsingleton.org/wp-content/uploads/2012/03/IMG_20120304_232938.jpg"/>
 
 Unfortunately, openjdk does not do JIT (just in time compilation) on ARM, so the performance of this set up was not going to get fast enough to drive the car (it managed about 1 frame per second without the neural network running). This was just the inspiration I needed to re-implement the project in C++! So, after a few further evenings' work I was able to claim what I think is the world's first self driving (RC) car powered by Raspberry Pi! The new C++ code can be found at <a href="https://github.com/dps/nnrccar/tree/master/cpp-driver">github.com/dps/nnrccar/tree/master/cpp-driver</a>.
 
@@ -33,11 +33,11 @@ Install the Arduino software
 Download the pre-built <a href="http://blog.davidsingleton.org/static/rpi_kernel_modules.zip">rasp pi / debian kernel modules</a> I built.
 
 Enable the modules
-<code>
+<pre>
 sudo insmod drivers/usb/class/cdc-acm
 sudo insmod drivers/usb/serial/usbserial
 sudo insmod drivers/usb/serial/ftdi_sio
-</code>
+</pre>
 
 Plug in your Arduino UNO.
 
