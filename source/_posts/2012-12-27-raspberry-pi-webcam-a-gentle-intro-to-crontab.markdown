@@ -9,7 +9,7 @@ categories:
 Here's a quick and easy first project for new [Raspberry Pi](http://www.raspberrypi.org/) owners - turn your Pi into a webcam, and learn about Linux's ability to run repeated tasks at scheduled intervals with the `cron` utility.
 
 
-These instructions work with the [Adafruit's Occidentalis](http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro) distribution for Raspberry Pi.  They likely also work with any version of the Raspian distro, but I highly recommend Occidentalis if you'd like to do more hardware hacking with your Pi.  Adafruit have good [instructions on how to get started](http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/occidentalis-v0-dot-2) and install on an sd card.
+These instructions work with [Adafruit's Occidentalis](http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro) distribution for Raspberry Pi.  They likely also work with any version of the Raspian distro, but I highly recommend Occidentalis if you'd like to do more hardware hacking with your Pi.  Adafruit have good [instructions on how to get started](http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/occidentalis-v0-dot-2) and install on an sd card.
 
 You will need to set up a wired or wireless internet connection to your Pi.
 
@@ -80,9 +80,9 @@ $ crontab -l
 25 6 * * * ./rotate-logs.sh
 ```
 
-That's more interesting - the administrator of this machine has added an entry to run a script called `rotate-logs.sh`, but what do the other fields mean?  The first line of this crontab is a comment (comment lines start with #) which might help explain - one which `crontab` inserts when you first start editing the table.
+That's more interesting - the administrator of this machine has added an entry to run a script called `rotate-logs.sh`, but what do the other fields mean?  The first line of this crontab is a comment (comment lines start with #) which might help explain.  This comment is inserted by `crontab` when you first start editing the table.
 
-With the comment, you might be able to guess what the meaning of the numbers on the second row are?
+Now you might be able to guess what the meaning of the numbers on the second row are?
 
 They are values, separated by spaces which define when to run the specified command.
 
@@ -255,4 +255,4 @@ Hurrah!  You've now learnt how to take photos with a USB webcam connected to a R
 
 (Advanced) Exercise for the reader: it should also be possible to host your webcam image on [Dropbox](http://dropbox.com) by building their [linux daemon](https://www.dropbox.com/help/247/en) from source code for the Raspberry Pi (the binaries they provide are not suitable for the ARM processor on the Pi).  Please [drop me a note](mailto:davidsingleton at gmail.com) if you manage to do this successfully, I'll give it a try in the New Year.
 
-Please leave any comments on [this Google Plus post](about:blank).
+Please leave any comments on [this Google Plus post](https://plus.google.com/u/0/117098976115661643090/posts/C2FUa7hU5XU).
