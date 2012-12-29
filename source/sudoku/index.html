@@ -1,3 +1,9 @@
+---
+title: "ShortestSudokuSolver"
+date: 2012-12-26 20:00
+comments: true
+categories: 
+---
 <html>
 <head>
 <title>ShortestSudokuSolver</title>
@@ -328,22 +334,20 @@ h1 {
 <body>
 <div style="position: relative; top: 10; left: 10;"><a href="http://blog.davidsingleton.org/">&larr; back to blog.davidsingleton.org</a></div>
 <h1>ShortestSudokuSolver</h1>
-Sometime back in 2006, Mark Byers started collecting and tracking the shortest <a href="http://en.wikipedia.org/wiki/Sudoku">Sudoku</a> solvers in a variety of programming languages on the web.  It was a cool page (and one I had a vested interest in since I had a hand in the Java solver) but sadly dropped off the web sometime in 2008.  With Mark's permission, I'm re-instating the content here and declaring it re-open for submissions - if you can improve on the solvers below or contribute a solver in a new language, please <a href="mailto:davidsingleton<at>gmail.com">let me know</a>. --  <i>David Singleton - August 2011</i>.
+Sometime back in 2006, Mark Byers started collecting and tracking the shortest <a href="http://en.wikipedia.org/wiki/Sudoku">Sudoku</a> solvers in a variety of programming languages on the web.  It was a cool page (and one I had a vested interest in since I had a hand in the Java solver) but sadly dropped off the web sometime in 2008.  With Mark's permission, I'm re-instating the content here and declaring it re-open for submissions - if you can improve on the solvers below or contribute a solver in a new language, please let me know. --  <i>davidsingleton (at) gmail - David Singleton - August 2011</i>.
 <br/><br/>
 <h2 id="head-e14053798713e2540ecae1f9bc618d90e6eec01a">Shortest Sudoku Solver</h2> 
 <p> 
 The following 101 bytes K program can solve Sudoku puzzles: 
 </p> 
- 
-<pre>p:+{(=x)x}'p,,3/:_(p:,/'+:\9#'!9)%3
-1@,/$*{$[&amp;/x;,x;,/.z.s'@[x;i;:;]'&amp;27=x[,/p i:x?0]?!10]}@.:'*.z.x;
-</pre><p> 
-Here is an example of using the solver to solve <a class="external" href="http://www.dailysudoku.com/sudoku/play.shtml?p=2:0:0:3:7:0:0:0:9:0:0:9:2:0:0:0:0:7:0:0:1:0:0:4:0:0:2:0:5:0:0:0:0:8:0:0:0:0:8:0:0:0:9:0:0:0:0:6:0:0:0:0:4:0:9:0:0:1:0:0:5:0:0:8:0:0:0:0:7:6:0:0:4:0:0:0:8:9:0:0:1:">this puzzle</a>: 
+<script src="https://gist.github.com/4407934.js"></script>
+<p> 
+Here is an example of using the solver to solve <a   href="http://www.dailysudoku.com/sudoku/play.shtml?p=2:0:0:3:7:0:0:0:9:0:0:9:2:0:0:0:0:7:0:0:1:0:0:4:0:0:2:0:5:0:0:0:0:8:0:0:0:0:8:0:0:0:9:0:0:0:0:6:0:0:0:0:4:0:9:0:0:1:0:0:5:0:0:8:0:0:0:0:7:6:0:0:4:0:0:0:8:9:0:0:1:">this puzzle</a>: 
 </p> 
  
 <pre>q sudoku.k 200370009009200007001004002050000800008000900006000040900100500800007600400089001 2&gt;/dev/null &lt;/dev/null
 </pre><p> 
-And the <a class="external" href="http://www.dailysudoku.com/sudoku/play.shtml?p=2:8:4:3:7:5:1:6:9:6:3:9:2:1:8:4:5:7:5:7:1:9:6:4:3:8:2:1:5:2:4:9:6:8:7:3:3:4:8:7:5:2:9:1:6:7:9:6:8:3:1:2:4:5:9:6:7:1:4:3:5:2:8:8:1:3:5:2:7:6:9:4:4:2:5:6:8:9:7:3:1:">result</a>: 
+And the <a   href="http://www.dailysudoku.com/sudoku/play.shtml?p=2:8:4:3:7:5:1:6:9:6:3:9:2:1:8:4:5:7:5:7:1:9:6:4:3:8:2:1:5:2:4:9:6:8:7:3:3:4:8:7:5:2:9:1:6:7:9:6:8:3:1:2:4:5:9:6:7:1:4:3:5:2:8:8:1:3:5:2:7:6:9:4:4:2:5:6:8:9:7:3:1:">result</a>: 
 </p> 
  
 <pre>284375169639218457571964382152496873348752916796831245967143528813527694425689731
@@ -355,11 +359,9 @@ See below for more information about this program, and for solvers in other lang
 <p> 
 This Sudoku solver in C was written by Oli Charlesworth and is 176 bytes long: 
 </p> 
- 
-<pre>main(int j,char**V){char*R=V[1],i=0,k=48;for(;*R&gt;k;*++R||
-puts(R-i))++i;for(;++k&lt;58;*R&amp;&amp;main(*R=k,V),*R=1)for(j=81;j
---;)*R*=R[j-i]-k||i/9^j/9&amp;&amp;i%9^j%9&amp;&amp;i/27^j/27|i%9/3^j%9/3;}
-</pre><p> 
+
+<script src="https://gist.github.com/4407942.js"></script>
+<p> 
 To compile and then run (using GCC for this example): 
 </p> 
  
@@ -368,14 +370,10 @@ To compile and then run (using GCC for this example):
 The program also compiles and runs successfully in Microsoft Visual Studio. 
 </p> 
 <p> 
-Oli also pointed out that this program is not strictly legal C, and suggested another slightly longer version (198 bytes) that is legal C: 
+Oli also pointed out that this program is not strictly legal C, and suggested another <a href="https://gist.github.com/4407948">slightly longer version (198 bytes) that is legal C</a>.
 </p> 
  
-<pre>#include&lt;stdio.h&gt;
-int main(int j,char**V){char*R=V[1],i=0,k=48;for(;*R&gt;k;*++R||
-puts(R-i))++i;for(;++k&lt;58;*R&amp;&amp;main(*R=k,V),*R=1)for(j=81;j
---;)*R*=R[j-i]-k||i/9^j/9&amp;&amp;i%9^j%9&amp;&amp;i/27^j/27|i%9/3^j%9/3;}
-</pre><p> 
+<p> 
 Contributors: 
 </p> 
  
@@ -397,13 +395,11 @@ Contributors:
  
 <h4 id="head-9c53c00c11322199b3e81911676df4641d902d7b">Groovy</h4> 
 <p> 
-A <a class="external" href="http://groovy.codehaus.org/">Groovy</a> Sudoku Solver in 208 bytes. 
+A <a   href="http://groovy.codehaus.org/">Groovy</a> Sudoku Solver in 208 bytes. 
 </p> 
  
-<pre>def r(a){def i=a.indexOf(48);if(i&lt;0)print a else(('1'..'9')-(0..80).collect{
-j-&gt;g={(int)it(i)==(int)it(j)};g{it/9}|g{it%9}|g{it/27}&amp;g{it%9/3}?a[j]:'0'})
-.each{i==0?r(it+a[i+1..-1]):r(a[0..&lt;i]+it+a[i+1..-1])}}
-</pre><p> 
+<script src="https://gist.github.com/4407956.js"></script>
+<p> 
 Contributors: 
 </p> 
  
@@ -430,15 +426,8 @@ Contributors:
  
 <h4 id="head-c0c271c8f62efa33d3ac8edbe0fea6e52fc84150">Haskell</h4> 
  
-<pre>z""a=a
-z('0':b)t=foldr(++)""[z b$t++[x]|x&lt;-['1'..'9'],notElem x
-d]where{d=[h$m`mod`9+i*9|i&lt;-a]++[h$m-j 9+i|i&lt;-a]++[h$i*9`mod`26+m-j 3-j
-27+j 9|i&lt;-a];j=mod m;m=length t;h=(!!)$t++'0':b;a=[0..8]}
-z(c:b)a=z b$a++[c]
-main=do
-a&lt;-getLine
-putStr$z a""
-</pre><p> 
+<script src="https://gist.github.com/4407967.js"></script>
+<p> 
 To run: 
 </p> 
  
@@ -460,18 +449,15 @@ Contributors:
  
 <h4 id="head-e027e57610f85225767aafbbf23fed7457e55828">Java</h4> 
 <p> 
-The shortest Java Sudoku solver is 294 bytes. 
-</p> 
- 
-<pre>class S{static void r(char[]b,int p){long u=0;if(--p&lt;0)System.out.print(b);else
-if(b[p]&gt;48)r(b,p);else{for(int i=81;i--&gt;0;)u|=(p-i)%9*(p/9^i/9)*(p/27^i/27|p%9/3
-^i%9/3)==0?1L&lt;&lt;b[i]:0;for(b[p]=58;--b[p]&gt;48;)if((u&gt;&gt;b[p]&amp;1)&lt;1)r(b,p);}}public
-static void main(String[]a){r(a[0].toCharArray(),81);}}
-</pre><p> 
+The shortest Java Sudoku solver is 286 bytes. 
+</p>
+<script src="https://gist.github.com/4407799.js"></script>
+
+<p> 
 Here is an example of how to run the program: 
 </p> 
  
-<pre>javac S.java; java S 200370009009200007001004002050000800008000900006000040900100500800007600400089001
+<pre>javac J.java; java J 200370009009200007001004002050000800008000900006000040900100500800007600400089001
 </pre><p> 
 Contributors: 
 </p> 
@@ -480,7 +466,7 @@ Contributors:
  
     <li> 
 <p> 
- <a class="external" href="http://www.davidsingleton.org/">David Singleton</a> created the algorithm and did the initial reduction work. 
+ <a href="http://blog.davidsingleton.org/">David Singleton</a> created the algorithm and did the initial reduction work. 
 </p> 
 </li> 
     <li> 
@@ -498,9 +484,14 @@ Contributors:
  Mick Killianey and David Beaumont reduced it further to 295 bytes. 
 </p> 
 </li> 
-    <li> 
+<li> 
 <p> 
  David Singleton and Mick Killianey knocked one more byte off (294 bytes). 
+</p> 
+</li> 
+<li> 
+<p> 
+ Joel Hockey rewrote the algorithm and used varargs to make main() the recursive function to knock off 5 more (286 bytes).
 </p> 
 </li> 
  
@@ -512,10 +503,9 @@ Contributors:
 This Sudoku solver written in K is 101 bytes long. 
 </p> 
  
-<pre>p:+{(=x)x}'p,,3/:_(p:,/'+:\9#'!9)%3
-1@,/$*{$[&amp;/x;,x;,/.z.s'@[x;i;:;]'&amp;27=x[,/p i:x?0]?!10]}@.:'*.z.x;
-</pre><p> 
-<a class="external" href="http://en.wikipedia.org/wiki/K_(programming_language)">K</a> is a general purpose language produced by <a class="external" href="http://kx.com/">kx</a>. It is used mainly in the financial community. Some language <a class="external" href="http://kx.com/q/d">documentation</a> is available. 
+<script src="https://gist.github.com/4407934.js"></script>
+<p> 
+<a   href="http://en.wikipedia.org/wiki/K_(programming_language)">K</a> is a general purpose language produced by <a   href="http://kx.com/">kx</a>. It is used mainly in the financial community. Some language <a   href="http://kx.com/q/d">documentation</a> is available. 
 </p> 
 <p> 
 If we allow printing spaces between the characters, the program can be shortened to 95 bytes: 
@@ -560,20 +550,16 @@ Contributors:
  
 <h4 id="head-f5c5d23fc11ff3c980a8300a56c4ff5754cbf849">Objective Caml</h4> 
 <p> 
-The following Object Caml program is 244 bytes. 
+The following Object Caml program is 239 bytes. 
 </p> 
  
-<pre>open String let rec s p=try let rec(%)=(mod)and i=index p '0'and b
-j=i&lt;&gt;j&amp;(i/9=j/9||i%9=j%9||i/27=j/27&amp;i%9/3=j%9/3)&amp;p.[i]=p.[j]||j&lt;80&amp;b(j+1)in
-iter(fun c-&gt;p.[i]&lt;-c;b 0||()=s p;())"948721536";p.[i]&lt;-'0'with
-_-&gt;print_string p;;s(read_line())
-</pre><p> 
+<script src="https://gist.github.com/4407980.js"></script><p> 
 Example usage: 
 </p> 
  
 <pre>echo 000010000301400860900500200700160000020805010000097004003004006048006907000080000 | ocaml sudoku.ml
 </pre><p> 
-An Objective Caml interpreter is <a class="external" href="http://caml.inria.fr/download.en.html">available for free download</a>. 
+An Objective Caml interpreter is <a   href="http://caml.inria.fr/download.en.html">available for free download</a>. 
 </p> 
 <p> 
 Contributors: 
@@ -610,9 +596,8 @@ Contributors:
 The following Perl program that can solve Sudoku is 121 bytes: 
 </p> 
  
-<pre>$_=$`.$_.$'.&lt;&gt;;split//;${/[@_[map{$i-($i="@-")%9+$_,9*$_+$i%
-9,9*$_%26+$i-$i%27+$i%9-$i%3}0..8]]/o||do$0}for/0/||print..9
-</pre><p> 
+<script src="https://gist.github.com/4407998.js"></script>
+<p> 
 Example usage: 
 </p> 
  
@@ -648,7 +633,7 @@ Contributors:
  
     <li> 
 <p> 
- This program is a slightly modified version of another <a class="external" href="http://www.ecclestoad.co.uk/blog/2005/06/02/sudoku_solver_in_three_lines_explained.html">three line Sudoku Solver</a> (page includes a description of how it works). 
+ This program is a slightly modified version of another <a   href="http://www.ecclestoad.co.uk/blog/2005/06/02/sudoku_solver_in_three_lines_explained.html">three line Sudoku Solver</a> (page includes a description of how it works). 
 </p> 
 </li> 
     <li> 
@@ -663,7 +648,7 @@ Contributors:
 </li> 
     <li> 
 <p> 
- <a class="external" href="http://personales.alc.upv.es/~pjcarbon/">Pablo Carbonell</a> reduced it to 181 bytes, and provided this comment: 
+ <a href="http://personales.alc.upv.es/~pjcarbon/">Pablo Carbonell</a> reduced it to 181 bytes, and provided this comment: 
 </p> 
 </li> 
  
@@ -700,13 +685,8 @@ used as a regular expression range in the grep.</pre>
 The current shortest Python sudoku solver program is 169 bytes long. This program is clean, in that it does not use any unusual features such as outputting to standard error, or crashing instead of terminating properly. It lists all solutions if there are more than one. It requires 6 lines each with no more than 80 characters. 
 </p> 
  
-<pre>def r(a):
- i=a.find('0')
- if i&lt;0:print a
- [m in[(i-j)%9*(i/9^j/9)*(i/27^j/27|i%9/3^j%9/3)or a[j]for
-j in range(81)]or r(a[:i]+m+a[i+1:])for m in`14**7*9`]
-r(raw_input())
-</pre><p> 
+<script src="https://gist.github.com/4408008.js"></script>
+<p> 
 To run the program, use the following syntax: 
 </p> 
  
@@ -739,7 +719,7 @@ Contributors:
  
     <li> 
 <p> 
- The original python program of length 178 bytes was written by Mark Byers, with help from <a class="external" href="http://mzz.mine.nu/">marienz</a> and Random832, originally based on the Perl program above. 
+ The original python program of length 178 bytes was written by Mark Byers, with help from <a   href="http://mzz.mine.nu/">marienz</a> and Random832, originally based on the Perl program above. 
 </p> 
 </li> 
     <li> 
@@ -761,9 +741,8 @@ Contributors:
 The current shortest Ruby Sudoku solver program is 122 bytes long. 
 </p> 
  
-<pre>$*.map{|a|(i=a=~/0/)?(v=*?1..?9).fill{|j|v-=[a[j+i-k=i%9],a[
-k+j*=9],a[j%26+i-i%3-i%27+k]]}+v.map{|k|$*.&lt;&lt;$`&lt;&lt;k&lt;&lt;$'}:p(a)}
-</pre><p> 
+<script src="https://gist.github.com/4408034.js"></script>
+<p> 
 This program prints all the solutions if there are multiple solutions (a real Sudoku should only have one solution). 
 </p> 
 <p> 
@@ -801,7 +780,7 @@ Contributors:
 </li> 
     <li> 
 <p> 
- <a class="external" href="mailto:acw1668@yahoo.com.hk"><img src="./ShortestSudokuSolver - Mark Byers' Website_files/moin-email.png" alt="[MAILTO]" height="10" width="14">acw1668</a> changed <tt>(p&nbsp;a)</tt> to <tt>p(a)</tt> to reduce it to 133 bytes, saving one byte. 
+ <a   href="mailto:acw1668@yahoo.com.hk"><img src="./ShortestSudokuSolver - Mark Byers' Website_files/moin-email.png" alt="[MAILTO]" height="10" width="14">acw1668</a> changed <tt>(p&nbsp;a)</tt> to <tt>p(a)</tt> to reduce it to 133 bytes, saving one byte. 
 </p> 
 </li> 
     <li> 
@@ -832,17 +811,17 @@ New line characters are counted as one byte.
 A valid program can accept any 9x9 Sudoku from standard input (or else the first command line parameter, if you prefer) and should output the result to standard out. I will also list some of the programs that cheat very slightly (for example, by outputing to standard error instead of standard out). 
 </p> 
 <p> 
-If command line parameters are required, they are counted as extra bytes using the <a class="external" href="http://www.xs4all.nl/~thospel/golf/rules.html">perlgolf counting</a> rules. 
+If command line parameters are required, they are counted as extra bytes using the <a   href="http://www.xs4all.nl/~thospel/golf/rules.html">perlgolf counting</a> rules. 
 </p> 
 <p> 
-Mark's original version of this page appeared on the <a class="external" href="http://digg.com/programming/Even_Shorter_Sudoku_Solver_-_In_Python">front page of Digg</a> and <a class="external" href="http://programming.reddit.com/info/9xha/comments">Reddit</a>! (2006-07-13) 
+Mark's original version of this page appeared on the <a   href="http://digg.com/programming/Even_Shorter_Sudoku_Solver_-_In_Python">front page of Digg</a> and <a   href="http://programming.reddit.com/info/9xha/comments">Reddit</a>! (2006-07-13) 
 </p> 
 <p> 
-If you enjoyed this page, you might also like <a class="external" href="http://codegolf.com/">Code Golf</a>. 
+If you enjoyed this page, you might also like <a   href="http://codegolf.com/">Code Golf</a>. 
 </p> 
 <h3 id="head-26c54496b5e92840a0faca6da492a83eb42c22ae">Do you have a shorter program?</h3> 
 <p> 
-Please <a class="external" href="mailto:davidsingleton<at>gmail.com">let me know</a> if you find a shorter Sudoku Solving program. 
+Please <a href="mailto:davidsingleton at gmail.com">let me know</a> if you find a shorter Sudoku Solving program. 
 </p> 
 </div>
 <script type="text/javascript"><!--
