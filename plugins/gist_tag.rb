@@ -83,8 +83,6 @@ module Jekyll
       https.use_ssl     = true
       https.verify_mode = OpenSSL::SSL::VERIFY_NONE
       request           = Net::HTTP::Get.new raw_uri.request_uri
-      https.open_timeout = 30
-      https.read_timeout = 30
       data              = https.request request
       data              = data.body
       cache gist, file, data unless @cache_disabled
