@@ -121,3 +121,8 @@ The camera battery only lasted for around 90 30 second exposures when I tested i
 
 <iframe width="420" height="315" src="http://www.youtube.com/embed/L1ZXyQefgy0?rel=0" frameborder="0" allowfullscreen></iframe>
 <iframe width="420" height="315" src="http://www.youtube.com/embed/n8DVoZvtql4?rel=0" frameborder="0" allowfullscreen></iframe>
+
+Comments
+--------
+
+I'm keen to know what you think or if you try it yourself - Please <a href="https://plus.google.com/117098976115661643090/posts/dquzNka5n3a">comment on this Google+ post</a>.
