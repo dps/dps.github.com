@@ -23,6 +23,8 @@ Here is the circuit diagram for the relay board - we drive the relay coil from t
 
 You can see step-by-step instructions on how to assemble the relay board on <a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1">this spark</a>.<br/><center>
 <a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1"><img src="/static/spark.png" width="80%"/></a></center>
+<h2><a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1">Spark: Raspberry Pi relay board.</a></h2>
+<!-- more -->
 
 Connecting the lamp
 -------------------
@@ -69,6 +71,12 @@ This bit is easy.  Visit <a href="http://webalert.davidsingleton.org/">http://we
 
 <center><a href="http://webalert.davidsingleton.org/"><img src="/static/webalert.png" style="border: 1px solid #ccc;"/></a></center>
 
+What does webalert do?  It's a simple service hosted on Heroku which serves up a javascript script which adds a 1 pixel, transparent, image to your webpage with a unique URL.  When the visitor's web browser loads that image, the service sees the event and publishes a message to a Redis pubsub queue which the Raspberry Pi listens to.  You don't need to write or install this, you can simply reuse mine.
+
+
+<center><a href="http://webalert.davidsingleton.org/"><img src="/static/waflow.png" style="border: 1px solid #ccc;"/></a></center>
+
+
 Run the client on your Pi
 -------------------------
 
@@ -91,3 +99,21 @@ sudo python weblight.py [your token]
 ```
 
 Ta da!  clickety click flashy flash, your website in your living room.
+
+Comments? Join the <a href="http://news.ycombinator.com/item?id=5176648">discussion</a> on Hacker News.
+
+<br/><br/>
+<hr/>
+<br/>
+Want to get started with RPi + electronics yourself?  Here's some stuff to buy (affiliates links, but the kits and prices are good).
+<table><tr><td><center>
+<a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14421&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14421%26scode%3DGS401%26CAWELAID%3D1599056700&usg=AFHzDLsOgsCYMI_KRBudg9V-cbzxD_5s2Q&pubid=21000000000379947">
+<b>512MB Raspberry Pi Project Board Model B</b>
+<br/>
+<img src="http://www.mcmelectronics.com/content/productimages/s4/83-14421.jpg" width="240px"/></a></center></td><td>&nbsp;</td><td><center>
+
+<a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14385&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14385%26scode%3DGS401%26CAWELAID%3D1562166092&usg=AFHzDLtTF5zhVmSUuM4la4iPzMpIsTHYlg&pubid=21000000000379947">
+<img src="http://www.mcmelectronics.com/content/productimages/s4/83-14385.jpg" width="240px"/>
+<br/>
+<b>Adafruit 955 Raspberry Pi (Electronics) Starter Project Kit</b>
+</a></center></td></tr></table>
