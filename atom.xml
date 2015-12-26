@@ -1,0 +1,1186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[david singleton]]></title>
+  <link href="http://dps.github.com/atom.xml" rel="self"/>
+  <link href="http://dps.github.com/"/>
+  <updated>2015-12-26T21:21:14+00:00</updated>
+  <id>http://dps.github.com/</id>
+  <author>
+    <name><![CDATA[David Singleton]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Journal 2.0]]></title>
+    <link href="http://dps.github.com/journal-2-dot-0/"/>
+    <updated>2015-12-10T18:32:00+00:00</updated>
+    <id>http://dps.github.com/journal-2-dot-0</id>
+    <content type="html"><![CDATA[<p>I&#8217;m a Software person, I spend 80+% of my waking hours in front of some kind of computing device.  I love it.  Building software products is fun and creative - virtually anything you imagine is possible, sometimes things that seem impossible are just difficult.  Careful thinking and prioritization helps build the most amazing products.</p>
+
+<p>It may be surprising to you, but I like to write things down.  With a pen.  It helps me remember things and to fully internalize whatever it is I&#8217;m writing about.  I write documents and emails and posts and tweets on a computer too, but when I really need to remember something, I write it down.  When I was studying as a kid, or revising for my finals, I made detailed summary notes and somehow, once I&#8217;d processed whatever I was trying to remember through the physical act of writing, recall became much easier.</p>
+
+<p>I am quite a busy person.  I have many different projects all going on at the same time.  I mostly keep myself organized using my email inbox, a todo list and my (online) calendar.  Recently, I&#8217;ve found myself wishing I knew how to spend more of my time on stuff that really matters to me - to drive my inbox and my calendar rather than let them drive me.</p>
+
+<p>Therefore, I&#8217;ve decided to try making and using a paper journal.  Not just a diary, but a structured scratchpad that is designed to help me work the way I want to.</p>
+
+<p>It has sections for setting objectives and how they will be measured.  The act of writing them down will help me remember what the most important goals are.  They repeat in the journal at the right interval so I can track my progress and set sub-goals.</p>
+
+<p>It has sections for plotting charts of metrics that relate to my objectives throughout the year.  The act of plotting my progress on a chart every day and every week keeps my priorities connected to my goals.</p>
+
+<p>I&#8217;m a software person, so there are sections for wireframing, for sketching system designs and for capturing feedback.  There&#8217;s even an ASCII chart, because who knows when you might find yourself stranded on Mars with only a webcam and a pointer to communicate with earth?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Northbelt]]></title>
+    <link href="http://dps.github.com/the-northbelt/"/>
+    <updated>2014-09-01T20:53:00+01:00</updated>
+    <id>http://dps.github.com/the-northbelt</id>
+    <content type="html"><![CDATA[<p>Recently I read <a href="http://archive.wired.com/wired/archive/15.04/esp.html">this old WIRED article</a> linked on a dicussion forum.</p>
+
+<p>It kindof blew my mind. For a while in 2004, a man in Germany wore a belt which continuously gave tactile feedback indicating which direction was north, and he developed a sixth sense of direction.</p>
+
+<p><i>
+&quot;On a visit to Hamburg, about 100 miles away, he noticed that he was conscious of the direction of his hometown. Wächter felt the vibration in his dreams, moving around his waist, just like when he was awake.&quot;</i></p>
+
+<p>So obviously, I had to have a magical north pointing belt myself.  There are a bunch of project pages across the web of folks who have made their own, but they were all pretty old and bulky, so I&#8217;ve started a little project to build one using slightly more up to date parts.  It&#8217;s currently a work in progress, but here&#8217;s a picture of the breadboard prototype.</p>
+
+<p><img src="http://dps.github.com/images/breadboard.png" /></p>
+
+<p>You can follow along with my progress in this github repo:  <a href="https://github.com/dps/northbelt">https://github.com/dps/northbelt</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fitbit for Bonsai Trees]]></title>
+    <link href="http://dps.github.com/fitbit-for-bonsai-trees/"/>
+    <updated>2013-08-06T19:50:00+01:00</updated>
+    <id>http://dps.github.com/fitbit-for-bonsai-trees</id>
+    <content type="html"><![CDATA[<p>Things have been kindof busy lately but I&#8217;ve been on-again / off-again working on a little project to wirelessly track the temperature, light level and soil moisture of my bonsai tree, so I can track its progress and know when to water (and more importantly, when not to).</p>
+
+<p><img src="http://dps.github.com/images/bonsai.jpg" /></p>
+
+<p>I&#8217;m using a <a href="http://blog.davidsingleton.org/wixel/">Pololu Wixel</a> as the brains of this device. The picture above is of the first prototype, built out on a permaproto board with a huge enclosure and a wired connection to the sensors.  This prompted my previous blog post on the Wixel in general and how to get it to sleep in low power modes to maximize battery life.  I also experimented with a solar panel to provide power which worked nicely in direct sunlight but would need to be <a href="http://www.sensorsmag.com/networking-communications/energy-harvesting/using-a-small-solar-cell-and-a-supercapacitor-a-wireless-sen-7310">augmented with a big capacitor</a> and a harvesting set up to cope with San Francisco&#8217;s cloudy days (and nights!), so I decided to go in a different direction - to operate with low power draw and in a small package using a single AA battery, and eventually to swap out the Wixel and use a <a href="http://www.ti.com/product/cc2511f32">CC2511</a> directly on the device itself.</p>
+
+<p>This past weekend I finally got time to work on the project again and managed to layout a schematic and PCB for prototype number 2, which will essentially be a Wixel shield but get power supply, board and sensors down into a single small package.  I used Sketchup to visualize the 3D layout of components in the little package and to design a case which I&#8217;ll be 3D printing this week.</p>
+
+<p><img src="http://dps.github.com/images/board.png" /> <br/>
+<img src="http://dps.github.com/images/wcase.png" />
+<img src="http://dps.github.com/images/wcomp.png" /></p>
+
+<!-- more -->
+
+
+<p>I&#8217;m experimenting with a Linear <a href="http://www.linear.com/product/LTC3525">LTC3525</a> to step up the AA voltage to  3.3V the CC2511 requires, which will test my surface mount <a href="https://www.sparkfun.com/tutorials/96">soldering skills</a>.  Grab the PCB design <a href="http://fritzing.org/projectswixel-bonsai-tracker">here</a>.</p>
+
+<p>Finally, I&#8217;m using another Wixel connected to a Raspberry Pi to collect the sensor data (this lives indoors) and have set up an instance of <a href="http://graphite.wikidot.com/">graphite</a> to receive and retrieve the timeseries data.  Here&#8217;s a sneak peek at the data coming out of prototype number 1:</p>
+
+<p><img src="http://dps.github.com/images/graphs.png" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Wixel]]></title>
+    <link href="http://dps.github.com/wixel/"/>
+    <updated>2013-06-23T17:47:00+01:00</updated>
+    <id>http://dps.github.com/wixel</id>
+    <content type="html"><![CDATA[<p>I&#8217;m working on a project (more soon!) which needs to sample a few sensors and send data wirelessly at low power.  After testing out an Arduino Uno + Bluetooth shield (too flaky, too bulky) and deciding that all the <a href="http://en.wikipedia.org/wiki/Bluetooth_low_energy">BLE</a> solutions out there are not quite ready yet (though some <a href="http://www.kickstarter.com/projects/kytelabs/bleduino-bluetooth-40-ble-made-easy-arduino-compat">look promising</a>), I discovered the <a href="http://www.pololu.com/catalog/product/1336">Pololu Wixel</a>.  I bought mine from <a href="https://www.sparkfun.com/products/10665">Sparkfun</a> at $20 each - you&#8217;ll need at least 2 since the RF protocol is proprietary.</p>
+
+<p><img src="http://dps.github.com/images/wixel_key.png" /></p>
+
+<p>The Wixel is a tiny dev board using the TI <a href="http://www.ti.com/product/cc2511f32">CC2511F32</a> System-on-Chip.  The CC2511 supports wireless comms via a proprietary 2.4 GHz RF protocol and includes an 8051 CPU core and built-in USB.  The CC2511F32 is <em>really</em> cheap and Pololu have done a nice job of packaging it on a 1.5 x 0.75 inch PCB which includes a USB mini connector and RF antenna.  They have also created an easy to use SDK for developing apps in C and flashing the board.</p>
+
+<!-- more -->
+
+
+<p><img src="http://dps.github.com/images/wixelconf.png" /></p>
+
+<p>The CC2511F32 has 19 GPIO pins and an analogue-to-digital converter so I was able to use it as a complete replacement for an Arduino or similar in my remote sensing project.</p>
+
+<p>The CC2511F32 draws tens of milliamps when active (the wixel more, since it contains a 3.3V regulator) but supports a few different low power modes which can turn off various parts of the SoC to achieve consumption down to 0.3 microamps.  None of the official wixel examples demonstrate using the low power modes of the SoC.  I did find a useful post by <a href="http://ublo.ro/wixel-pm3-low-power-sleep-mode-cc2511f32/">bogdaniel</a> on how to use PM3, but it took quite a lot of trial and error to get PM2 (lowest power mode which can be woken from on the system sleep timer) and the sleep timer working, so I have published a <a href="https://github.com/dps/wixel/blob/master/apps/low_power/low_power.c">low_power</a> example on github and a little <a href="http://www.youtube.com/watch?v=qkyD82yz60w">demo video</a> on youtube.</p>
+
+<p>The Wixel is pretty cool, but excitingly, TI have an updated version of the CC2511 family with BLE built in instead of proprietary RF - the <a href="http://www.ti.com/product/cc2540">CC2540</a>.  I hope Pololu, or some enterprising Kickstarters, develop a CC2540 dev board which is as easy to use as the Wixel in future.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing PiUi: add a simple mobile phone UI to your RaspberryPi project.]]></title>
+    <link href="http://dps.github.com/introducing-piui/"/>
+    <updated>2013-03-20T18:57:00+00:00</updated>
+    <id>http://dps.github.com/introducing-piui</id>
+    <content type="html"><![CDATA[<p><a href="http://github.com/dps/piui"><img src="https://raw.github.com/dps/piui/master/android/res/drawable-xhdpi/ic_launcher.png"/></a></p>
+
+<p>I&#8217;m excited to introduce you to a project I have been working on for a few weeks in my spare time: <b><a href="http://github.com/dps/piui">PiUi</a></b>.</p>
+
+<iframe width="853" height="480" src="http://www.youtube.com/embed/2ay0vuW6aNY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+<p>A lot of folks asked how to use my <a href="http://blog.davidsingleton.org/raspberry-pi-timelapse-controller/">RPi Timelapse Controller</a> without the LCD Plate - which is kindof expensive and not everyone is comfortable to solder one up themselves.  The answer of course is that this is possible, but&#8230;  without a UI you are limited to having the controller run on boot and it&#8217;s difficult to know everything&#8217;s working correctly and/or take control when you know better.</p>
+
+<p>The same is true of many hardware projects and an HDMI monitor + keyboard is not a feasible method of interaction away from your desk - wouldn&#8217;t it be great if you could add a UI on a device you already have in your pocket to any Raspberry Pi project?</p>
+
+<p>PiUi makes it easy to implement a rich mobile UI directly in python code and access it from your Android or iPhone.  It&#8217;s powered by <a href="http://maker.github.com/ratchet/">ratchet.js</a> so there are lots of UI components available to create beautiful interfaces.</p>
+
+<p>All you need in addition to a Raspberry Pi is a wifi adaptor (like <a href="https://www.adafruit.com/products/814">this one</a> from Adafruit).  Your Pi will create a wifi access point to connect your phone to, then simply navigate to <b>http://piui/</b> in a browser to access your app&#8217;s UI.  There&#8217;s even an <a href="https://play.google.com/store/apps/details?id=org.davidsingleton.piui">Android app</a> to make connecting easy and show useful status info plus an iPhone webapp you can save to your homescreen.</p>
+
+<p>Once the access point is set up (easy with pre-prepared <a href="https://github.com/dps/piui-sdcards">sd card images</a>), the full code required for a python helloworld example is:</p>
+
+<h2>Install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo pip install piui</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>HelloWorld</h2>
+
+<script src="https://gist.github.com/dps/5210265.js"></script>
+
+
+<h2>Result</h2>
+
+<p><img src="http://dps.github.com/images/helloworld.png" /></p>
+
+<p>PiUi is open source - <a href="http://www.github.com/dps/piui">fork it on github</a> - and is just getting started, so please use it, let me know what you think and help improve it.</p>
+
+<p>For detailed setup instructions, read on.</p>
+
+<p>Here&#8217;s a little demo of the Timelapse project with a PiUi interface (source at <a href="http://github.com/dps/piui-timelapse">github.com/dps/piui-timelapse</a>)</p>
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/85POjhakf4U?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+<!-- more -->
+
+
+<h1>Setup Instructions</h1>
+
+<h2>The easy way (using a pre-prepared SD card image)</h2>
+
+<p>Download the <code>piui_plus_examples.zip</code> file from <a href="https://github.com/dps/piui-sdcards/blob/master/piui_plus_examples.zip?raw=true">github.com/dps/piui-sdcards</a>.  Unzip it and you&#8217;ll find a 4Gb sd card image named <code>piui_plus_examples.img</code>.  Write it to an SD card by following the <a href="http://elinux.org/RPi_Easy_SD_Card_Setup">usual Raspberry Pi instructions</a>.  At present, this image is based on Occidentalis 0.2.</p>
+
+<p>Assuming you have the same wifi adapter I do, this will work out of the box.  If not, read the <a href="http://www.pi-point.co.uk/">Pi-Point</a> docs to configure for your own hardware.</p>
+
+<p>On first boot, you can sync the latest piui source with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd piui
+</span><span class='line'>git pull origin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and start the demo app with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>python piui_demo.py</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Viola!  PiUi nirvana.</p>
+
+<h2>The do-it-yourself way</h2>
+
+<p>Start with the latest release of <a href="http://www.raspberrypi.org/downloads">Raspbian</a> or (better as it&#8217;s ready for hardware projects) <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/occidentalis-v0-dot-2">Occidentalis</a>.</p>
+
+<p>Follow the <a href="http://www.pi-point.co.uk/">Pi-Point documentation</a> to turn your Pi into a wifi access point.  Note that if you use the <a href="https://www.adafruit.com/products/814">Adafruit wifi adapter</a>, these instructions do not work in full as the <code>nl80211</code> driver does not support that device (which uses a Realtek chipset).  <a href="http://blog.sip2serve.com/post/38010690418/raspberry-pi-access-point-using-rtl8192cu">This blog post</a> explains how to make it work - thanks Paul!</p>
+
+<p>Add an entry to <code>/etc/hosts</code> mapping the DNS name <code>piui</code> to the address you configured for the Pi in the step above.  Assuming it&#8217;s <code>192.168.1.1</code>, then you should add the following to <code>/etc/hosts</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>192.168.1.1     piui</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install <code>nginx</code> - nginx is an HTTP server and reverse proxy, we use it to multiplex requests to your app and the <code>piui-supervisor</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install nginx</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configure nginx using the <a href="https://github.com/dps/piui/blob/master/nginx-conf/nginx.conf">config file</a> in the PiUi github repo - copy this to <code>/etc/nginx/nginx.conf</code> and restart nginx.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/init.d/nginx restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Get the piui source code from github</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /home/pi
+</span><span class='line'>git clone https://github.com/dps/piui.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Arrange for the <code>piui-supervisor</code> to run on boot.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo cp /home/pi/piui/supervisor/piui-supervisor /etc/init.d
+</span><span class='line'>sudo update-rc.d piui-supervisor defaults</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Done!  Run the demo app:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd piui
+</span><span class='line'>python piui_demo.py</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Connect your phone to the wifi AP and navigate to &#8216;http://piui/&#8217;.</p>
+
+<p>Questions, ideas?  <a href="https://news.ycombinator.com/item?id=5432615">Join the discussion on Hacker News</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi Website Hit Tracker]]></title>
+    <link href="http://dps.github.com/raspberry-pi-website-hit-tracker/"/>
+    <updated>2013-02-04T21:49:00+00:00</updated>
+    <id>http://dps.github.com/raspberry-pi-website-hit-tracker</id>
+    <content type="html"><![CDATA[<p>You just made a funky neon sign flash in my living room.</p>
+
+<p>How?  I have just completed my latest project which is a neon lamp which lights up every time someone visits my website.  It&#8217;s controlled by a little relay board I built out on an <a href="http://adafruit.com/products/1148">Adafruit permaproto board</a> and connected to a <a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14421&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14421%26scode%3DGS401%26CAWELAID%3D1599056700&usg=AFHzDLsOgsCYMI_KRBudg9V-cbzxD_5s2Q&pubid=21000000000379947">Raspberry Pi</a>.  The Raspberry Pi is running a simple python script which generates an event every time someone loads this page.  I&#8217;ve made the part which integrates with the website open for anyone to use so you can build this out for yourself - have fun!</p>
+
+<div><span><img src="http://dps.github.com/static/relay.png"/></span><span><iframe width="560" height="315" src="http://www.youtube.com/embed/N1B0BHk9FL4?rel=0" frameborder="0" allowfullscreen></iframe></iframe></span></div>
+
+
+<h2>Building the Relay Board</h2>
+
+<p>The relay board connects to the Raspberry Pi General Purpose I/O (GPIO) pins via a ribbon cable.  Adafruit sells a <a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14389&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14389%26scode%3DGS401%26CAWELAID%3D1562166096&usg=AFHzDLv2-yk0flf9LYQoeR18YHLcWv3vvw&pubid=21000000000379947">Pi Cobbler</a> which makes it easy to break out the GPIO pins on a breadboard for prototyping.  Once you&#8217;re happy that the prototype is working, transferring a breadboard layout to the <a href="http://adafruit.com/products/1148">permaproto</a> board is quite simple (the soldering is easy and you just copy what you had on the breadboard).</p>
+
+<p><img src="http://dps.github.com/static/circuit.png"/><br/></p>
+
+<p>Here is the circuit diagram for the relay board - we drive the relay coil from the 5V supply which is switched on and off using a transistor controlled by one of the digital out pins (I used pin 18).  The diode prevents reverse voltage as the relay switches off from damaging the Pi.</p>
+
+<p>You can see step-by-step instructions on how to assemble the relay board on <a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1">this spark</a>.<br/><center>
+<a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1"><img src="http://dps.github.com/static/spark.png" width="80%"/></a></center></p>
+
+<h2><a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1">Spark: Raspberry Pi relay board.</a></h2>
+
+
+<!-- more -->
+
+
+<h2>Connecting the lamp</h2>
+
+<p>You can use any lamp or electronic device powered with a low direct current (anything which plugs in to a USB port or runs on batteries is ideal).  DO NOT attempt to use a mains powered lamp.  Even if your relays is rated for 110V, the prototyping board has exposed connections and mains electricity can kill.</p>
+
+<p>Simply cut one side of the power cable and attach to the switched part of the relay (I used screw terminals so I can connect and disconnect as I please).</p>
+
+<p><img src="http://dps.github.com/static/proto.png" width=100%/></p>
+
+<h2>RPi test program</h2>
+
+<p>The following little test program will drive your lamp on and off every 2 seconds to verify everything is working.</p>
+
+<p>I used the Adafruit Occidentalis distribution of Linux.  You can also use Raspbian.  Follow <a href="http://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-gpio">these instructions</a> to get the Pi set up, or use the quickstart below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install python-rpi.gpio</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the following Python program:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import RPi.GPIO as gpio
+</span><span class='line'>import time
+</span><span class='line'>
+</span><span class='line'>gpio.setmode(gpio.BCM)
+</span><span class='line'>gpio.setup(18, gpio.OUT)
+</span><span class='line'>while True:
+</span><span class='line'>  time.sleep(2)
+</span><span class='line'>  gpio.output(18, True)
+</span><span class='line'>  print "True"
+</span><span class='line'>  time.sleep(2)
+</span><span class='line'>  gpio.output(18, False)
+</span><span class='line'>  print "False"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each time False is printed, the lamp should turn on and off again when True is printed.</p>
+
+<h2>Set up your website</h2>
+
+<p>This bit is easy.  Visit <a href="http://webalert.davidsingleton.org/">http://webalert.davidsingleton.org/</a>, register your web page(s) and follow the instructions to add code to your web page.</p>
+
+<center><a href="http://webalert.davidsingleton.org/"><img src="http://dps.github.com/static/webalert.png" style="border: 1px solid #ccc;"/></a></center>
+
+
+<p>What does webalert do?  It&#8217;s a simple service hosted on Heroku which serves up a javascript script which adds a 1 pixel, transparent, image to your webpage with a unique URL.  When the visitor&#8217;s web browser loads that image, the service sees the event and publishes a message to a Redis pubsub queue which the Raspberry Pi listens to.  You don&#8217;t need to write or install this, you can simply reuse mine.</p>
+
+<center><a href="http://webalert.davidsingleton.org/"><img src="http://dps.github.com/static/waflow.png" style="border: 1px solid #ccc;"/></a></center>
+
+
+<h2>Run the client on your Pi</h2>
+
+<p>The webalert client uses <code>redis</code> to subscribe to events generated each time your website is loaded.  First, install the redis python module:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo pip install redis</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, in a new directory, get the webalert code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/dps/webalert.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And write a simple client which uses it - e.g.:</p>
+
+<script src="https://gist.github.com/dps/4712899.js"></script>
+
+
+<p>Finally, run passing your webalert client token on the command line:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo python weblight.py [your token]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ta da!  clickety click flashy flash, your website in your living room.</p>
+
+<p>Comments? Join the <a href="http://news.ycombinator.com/item?id=5176648">discussion</a> on Hacker News.</p>
+
+<br/><br/>
+
+
+<hr/>
+
+
+<br/>
+
+
+<p>Want to get started with RPi + electronics yourself?  Here&#8217;s some stuff to buy (affiliates links, but the kits and prices are good).</p>
+
+<table><tr><td><center>
+<a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14421&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14421%26scode%3DGS401%26CAWELAID%3D1599056700&usg=AFHzDLsOgsCYMI_KRBudg9V-cbzxD_5s2Q&pubid=21000000000379947">
+<b>512MB Raspberry Pi Project Board Model B</b>
+<br/>
+<img src="http://www.mcmelectronics.com/content/productimages/s4/83-14421.jpg" width="240px"/></a></center></td><td>&nbsp;</td><td><center>
+
+<a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14385&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14385%26scode%3DGS401%26CAWELAID%3D1562166092&usg=AFHzDLtTF5zhVmSUuM4la4iPzMpIsTHYlg&pubid=21000000000379947">
+<img src="http://www.mcmelectronics.com/content/productimages/s4/83-14385.jpg" width="240px"/>
+<br/>
+<b>Adafruit 955 Raspberry Pi (Electronics) Starter Project Kit</b>
+</a></center></td></tr></table>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi Timelapse Controller]]></title>
+    <link href="http://dps.github.com/raspberry-pi-timelapse-controller/"/>
+    <updated>2013-01-13T17:10:00+00:00</updated>
+    <id>http://dps.github.com/raspberry-pi-timelapse-controller</id>
+    <content type="html"><![CDATA[<div>
+    <span>
+<img src="http://dps.github.com/images/timelapse_setup.jpg" alt="" title="" width="480px"/>
+</span><span>
+<iframe width="480" height="360" src="http://www.youtube.com/embed/AZbK4acS5Mc" frameborder="0" allowfullscreen></iframe></span>
+</div>
+
+
+<p>A few weeks ago, I found <a href="http://www.youtube.com/watch?v=Zg_iO34_65k">this beautiful video on Youtube</a> &#8211; a timelapse video of stars and the Milky Way.  Seeing the stars appear to rotate overhead (due to the rotation of the Earth) and the intricate structure of our own galaxy gave me a profound feeling of the scale of the universe that we move through on spaceship Earth.  Of course, I wanted to record my own Milky Way timelapse.</p>
+
+<p>Capturing the Milky Way requires dark skies and long exposures, so this seemed like a great project to build using my fairly old <a href="http://www.amazon.com/gp/product/B0007QKN22/ref=as_li_ss_tl?ie=UTF8&tag=creativeflurr-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B0007QKN22">Canon EOS 350D</a> and <a href="http://www.raspberrypi.org/">Raspberry Pi</a>.  I also spent some time exploring what existing timelapse controllers can do - the holy grail of timelapse is to be able to capture sunset (and sunrise) seamlessly, where a wide range of shutter speeds need to be used to capture an appealing scene as the ambient light levels change profoundly.  You can see at the end of the milky way video I linked above that sunrise is not handled so well!  There are a number of scripts which can be run in-camera with homebrew firmware (e.g. <a href="http://chdk.wikia.com/wiki/CHDK">chdk</a>) but these cannot choose the best shutter speed based on the images taken - they have to guess the best values once there is too little light for the camera lightmeter to judge.  Since we can run fully featured image processing software like ImageMagick on the Linux based Pi, I decided to build a controller which could capture sunset.</p>
+
+<p>I also recently got hold of an <a href="http://www.adafruit.com/products/1110">Adafruit LCD Plate</a> for my Pi so I&#8217;ve added a User Interface too.</p>
+
+<p>I haven&#8217;t yet been able to make the Milky Way timelapse which is my end goal, but hope to do so in the coming weeks next time it&#8217;s dark, clear and I&#8217;m at Lake Tahoe, but the controller is working nicely.</p>
+
+<p>Read on to find full instructions, some demo videos and the software so you can try it yourself.</p>
+
+<p>At the top of this post you can see the set up and a demo video.</p>
+
+<!-- more -->
+
+
+<h2>The hardware</h2>
+
+<p>The hardware set up is very simple - I&#8217;m using a Raspberry Pi connected to a Canon EOS 350D via the camera&#8217;s regular USB interface.  The Raspberry Pi is powered from an external battery pack - I&#8217;m using a huge capacity <a href="http://www.amazon.com/gp/product/B009USAJCC/ref=as_li_ss_tl?ie=UTF8&tag=creativeflurr-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B009USAJCC">Anker 10000mAh pack</a> which I&#8217;d recommend but there are many other options.  The camera will need to be on a tripod - any tripod will work.</p>
+
+<h2>The Software</h2>
+
+<p>The timelapse controller is written in Python and makes use of two great Linux packages which need to be installed on the Pi - <code>gphoto2</code> for controlling the camera and downloading images and <code>ImageMagick</code> for analysing the resulting images to adjust exposure in the next frame.  The python software is available at <a href="https://github.com/dps/rpi-timelapse">github.com/dps/rpi-timelapse</a>.</p>
+
+<p>To install the dependencies:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install gphoto2
+</span><span class='line'>$ sudo apt-get install imagemagick
+</span><span class='line'>$ sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And to fetch the python code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/dps/rpi-timelapse.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can now run the timelapse controller with</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd rpi-timelapse
+</span><span class='line'>python tl.py</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When it starts, it first shows the network connection status and IP address if connected to a network which makes it easy to connect to the Pi without a display connected.  After tapping select, it shows the starting shutter speed and ISO that will be used.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Timelapse
+</span><span class='line'>T: 1/50 ISO: 200</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can tap UP/DOWN to shorten/lengthen the inital exposure, and SELECT will start the timelapse.</p>
+
+<center><img src="http://dps.github.com/images/timelapse-ui.png" alt="" title="" width="640px"/></center>
+
+
+<br/>
+
+
+<p>While shooting a timelapse sequence, a photo will be taken every 30 seconds (change <code>MIN_INTER_SHOT_DELAY_SECONDS</code> if you&#8217;d like to vary).  Each photo will be downloaded to the pi and the <code>identify</code> tool from ImageMagick is used to determine the average brightness of the image.  If the brightness is below <code>MIN_BRIGHTNESS</code>, the controller extends the shutter time to make the next exposure incrementally brighter and vice versa if the image is too bright.  This should result in a sequence which is reasonably exposed as the light level rises at sunrise or falls at sunset.  All the shutter / ISO settings which will actually be used are defined in the <code>CONFIGS</code> array in <code>tl.py</code> which can be edited for your camera.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CONFIGS = [("1/1600", 200),
+</span><span class='line'>           ("1/1000", 200),
+</span><span class='line'>           ("1/800", 200),
+</span><span class='line'>         ...
+</span><span class='line'>           ("1/50", 200),
+</span><span class='line'>           ("1/40", 200),
+</span><span class='line'>           ("1/30", 200),
+</span><span class='line'>           ("1/20", 200),
+</span><span class='line'>         ...        
+</span><span class='line'>           ("30", 200),
+</span><span class='line'>           ("30", 400),
+</span><span class='line'>           ("30", 800),
+</span><span class='line'>           ("30", 1600)]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I have elected only to raise the ISO sensitivity once the longest shutter time has been reached (since higher ISO equals more noise), but you could equally vary ISO throughout the sequence if desired.</p>
+
+<p>When the timelapse is done, all the resulting images can be copied off the pi to a computer connected to the same network with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scp pi@raspberrypi.local:rpi-timelapse/*.JPG .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And once downloaded, stitched into a nice timelapse video using <code>FFmpeg</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ffmpeg -r 18 -q:v 2 -start_number XXXX -i /tmp/timelapse/IMG_%d.JPG output.mp4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The change of exposure time at sunset ensures that each individual image is reasonably exposed, but when stitching them into a movie, this results in a little flicker each time the shutter time is ramped up.  This can easily be adjusted for by running the following before <code>ffmpeg</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>for a in *; do echo $a;/opt/ImageMagick/bin/mogrify -auto-gamma $a;done</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Alternative Cameras</h2>
+
+<p>This set up uses the Linux <code>gphoto2</code> package to control the camera.  Any other camera which supports long enough exposures and is supported by <code>gphoto2</code> should work, but you might need to make a few tweaks to the <code>CONFIGS</code> in <code>tl.py</code> to use shutter speeds and ISO modes supported by your camera.</p>
+
+<h2>Start on boot</h2>
+
+<p>You can make tl.py run on boot (instructions in this <a href="https://github.com/dps/rpi-timelapse/blob/master/README.md">README</a>) so that you can take the camera and raspberry pi out without a computer to kick off the timelapse.</p>
+
+<h2>Notes / work in progress</h2>
+
+<p>The camera battery only lasted for around 90 30 second exposures when I tested it this weekend (stars video below), though the temperature was below 0 F.  I will try again with an extended battery grip in future.  You can see a couple of my test shots below, neither is particularly photogenic, I was just testing the setup rather than trying to get a great video (yet!), expect to see some updates with video when I get a chance.</p>
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/L1ZXyQefgy0?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/n8DVoZvtql4?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+<h2>Comments</h2>
+
+<p>I&#8217;m keen to know what you think or if you try it yourself - Please <a href="https://plus.google.com/117098976115661643090/posts/dquzNka5n3a">comment on this Google+ post</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Raspberry Pi webcam; a gentle intro to crontab]]></title>
+    <link href="http://dps.github.com/raspberry-pi-webcam-a-gentle-intro-to-crontab/"/>
+    <updated>2012-12-27T20:08:00+00:00</updated>
+    <id>http://dps.github.com/raspberry-pi-webcam-a-gentle-intro-to-crontab</id>
+    <content type="html"><![CDATA[<p><img class="alignright" src="http://dps.github.com/static/images/webcam.jpg">
+Here&#8217;s a quick and easy first project for new <a href="http://www.raspberrypi.org/">Raspberry Pi</a> owners - turn your Pi into a webcam, and learn about Linux&#8217;s ability to run repeated tasks at scheduled intervals with the <code>cron</code> utility.</p>
+
+<p>These instructions work with <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro">Adafruit&#8217;s Occidentalis</a> distribution for Raspberry Pi.  They likely also work with any version of the Raspian distro, but I highly recommend Occidentalis if you&#8217;d like to do more hardware hacking with your Pi.  Adafruit have good <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/occidentalis-v0-dot-2">instructions on how to get started</a> and install on an sd card.</p>
+
+<p>You will need to set up a wired or wireless internet connection to your Pi.</p>
+
+<p><img class="alignright" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&Format=_SL110_&ASIN=B000RZQZM0&MarketPlace=US&ID=AsinImage&WS=1&tag=creativeflurr-20&ServiceVersion=20070822" title="Logitech Pro 9000" ></p>
+
+<h2>Choose a webcam</h2>
+
+<p>If you have a USB webcam lying around the house it&#8217;s very likely that it will work just fine.  If not, I used the <a href="http://www.amazon.com/gp/product/B000RZQZM0/ref=as_li_ss_tl?ie=UTF8&tag=creativeflurr-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B000RZQZM0">Logitech Pro 9000</a><img src="http://www.assoc-amazon.com/e/ir?t=creativeflurr-20&l=as2&o=1&a=B000RZQZM0" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> successfully and a <a href="http://www.ideasonboard.org/uvc/">full compatibility list</a> is available to check before you buy one.</p>
+
+<h2>Install fswebcam</h2>
+
+<p><code>fswebcam</code> is a small and simple webcam app for *nix.  Install it by issuing the following command on your Pi</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install fswebcam</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<p>If all is well, you will see something like the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>The following NEW packages will be installed:
+</span><span class='line'>  fswebcam
+</span><span class='line'>0 upgraded, 1 newly installed, 0 to remove and 135 not upgraded.
+</span><span class='line'>Need to get 44.2kB of archives.
+</span><span class='line'>After this operation, 139kB of additional disk space will be used.
+</span><span class='line'>Fetched 44.2kB in 0s (1,181kB/s)  
+</span><span class='line'>Selecting previously deselected package fswebcam.
+</span><span class='line'>Unpacking fswebcam (from .../fswebcam_20091224-1_i386.deb) ...
+</span><span class='line'>Processing triggers for man-db ...
+</span><span class='line'>Setting up fswebcam ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s take a look at the help page for <code>fswebcam</code> (edited to some of the parameters we care about)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ fswebcam --help</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Usage: fswebcam [&lt;options&gt;] &lt;filename&gt; [[&lt;options&gt;] &lt;filename&gt; ... ]
+</span><span class='line'>
+</span><span class='line'> Options:
+</span><span class='line'>
+</span><span class='line'> -?, --help                   Display this help page and exit.
+</span><span class='line'>...
+</span><span class='line'> -d, --device &lt;name&gt;          Sets the source to use.
+</span><span class='line'> -r, --resolution &lt;size&gt;      Sets the capture resolution.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With the webcam plugged in, we can take a photo and save it to the file <code>webcam.jpg</code> by issuing the command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ fswebcam -r 960x720 -d /dev/video0 webcam.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(960x720 is one of the higher supported resolutions of my camera, yours may differ.  <code>/dev/video0</code> is where my camera appears by default when I plug it in.)</p>
+
+<p>Here&#8217;s what my full resolution image looked like:</p>
+
+<p><img src="http://dps.github.com/static/images/webcam_960.jpg" alt="960x720 image from my webcam, taken with the Pi" /></p>
+
+<h2>A quick intro to <code>cron</code></h2>
+
+<p><code>fswebcam</code> has native support to keep taking photos repeatedly in a loop (check out <code>man fswebcam</code> and look for &#8216;loop&#8217;), but this is a great opportunity to explore Unix&#8217;s <code>cron</code> utility which is one of the simple but powerful unix tools that every hacker should have in his arsenal.  As explained in more detail on the <a href="http://en.wikipedia.org/wiki/Cron">wikipedia page for cron</a>, unix systems running <code>cron</code> periodically read a set of cron table files and take care of any tasks which have fallen due.  To edit the cron table we must use a command called <code>crontab</code>.</p>
+
+<p>You can view the cron table for the current user by issuing the command <code>crontab -l</code> - if you haven&#8217;t set one up already, this will show:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -l
+</span><span class='line'>no crontab for pi</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The table is empty.  But let&#8217;s take a look at the output from the server machine which hosts this blog:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -l
+</span><span class='line'># m h  dom mon dow   command
+</span><span class='line'>25 6 * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s more interesting - the administrator of this machine has added an entry to run a script called <code>rotate-logs.sh</code>, but what do the other fields mean?  The first line of this crontab is a comment (comment lines start with #) which might help explain.  This comment is inserted by <code>crontab</code> when you first start editing the table.</p>
+
+<p>Now you might be able to guess what the meaning of the numbers on the second row are?</p>
+
+<p>They are values, separated by spaces which define when to run the specified command.</p>
+
+<p><code>m</code> = minute past the hour, <code>h</code> = hour of the day, <code>dom</code> = day of the month, <code>mon</code> = month [of the year] and <code>dow</code> = day of week.  <code>cron</code> expects to find these fields separated by spaces and with <code>*</code>(star) to mean &#8220;any value&#8221; so in our example</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>25 6 * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>cron</code> will read the file and any time that the minute of the hour is 25 and the hour of the day is 6, on any day of the month etc. <code>./rotate-logs.sh</code> will be run.  As you have probably figured out, this has the effect of running the command once a day at 6:25am.</p>
+
+<p>You now know how to set up <code>cron</code> to run tasks at specified times of the day.  Let&#8217;s say we want to update our webcam image every 15 minutes.  Doing that neatly requires some advanced <code>cron</code> syntax.  In addition to setting individual minutes, hours etc we can also provide a list of values so</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0,15,30,45 * * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>would cause the rotate-logs.sh script to be run every 15 mins.  That&#8217;s still a little long winded, so how about:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*/15 * * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>*/15</code> means &#8220;every 15 minutes&#8221;.  The syntax works for any of the fields, so we can have</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>* */2 * * * ./foo # every two hours
+</span><span class='line'>* * */5 * * ./foo # every five days</span></code></pre></td></tr></table></div></figure>
+
+
+<p>etc.</p>
+
+<p>OK, now you know <code>cron</code>, let&#8217;s bring it all back together and make our actual webcam take a photo every 15 minutes.</p>
+
+<h2>Use cron to take an image repeatedly</h2>
+
+<p>Recall that we ran the command <code>fswebcam -r 960x720 -d /dev/video0 webcam.jpg</code> to take a photo from the webcam.  Let&#8217;s set up the <code>pi</code> user&#8217;s crontab to do that every 15 mins.</p>
+
+<p>At the command line, type</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -e</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should see a message to note that a new table is being created and end up in an editor with a blank file containing only the comment</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># m h  dom mon dow   command</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use your new-found <code>cron</code>-fu to add</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*/15 * * * * fswebcam -r 960x720 -d /dev/video0 /home/pi/webcam.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here you&#8217;ll note that I&#8217;ve added a fully qualified path for <code>/home/pi/webcam.jpg</code> - although <code>cron</code> runs tasks with the working directory as the user&#8217;s home directory, it&#8217;s good practice to use full path names in scripts where you may not be certain of the working directory context.</p>
+
+<p>Now save the file (if your editor is the default <code>nano</code>, press control-X) and you&#8217;ll see</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -e
+</span><span class='line'>crontab: installing new crontab
+</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Viola!  Your webcam is now saving that file every 15 mins.  If you want to check it&#8217;s working correctly at this point, try running <code>ls -l webcam.jpg</code> now and after a 15 min delay to check that the file&#8217;s timestamp has updated:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -l webcam.jpg 
+</span><span class='line'>-rw-r--r-- 1 pi pi 348450 2012-12-18 02:00 webcam.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also navigate to the URL <a href="file:///home/pi/webcam.jpg">file:///home/pi/webcam.jpg</a> in the web browser on the Pi to view the image.</p>
+
+<h2>Let the world see</h2>
+
+<p>A webcam which updates a file only you can see is not particularly useful, let&#8217;s fix that!  You have a few options for serving your webcam images.</p>
+
+<h3>raspberry pi webserver</h3>
+
+<p>You could simply run a webserver locally on the Pi:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd
+</span><span class='line'>$ python -m SimpleHTTPServer &
+</span><span class='line'>Serving HTTP on 0.0.0.0 port 8000 ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Will run a simple webserver in the pi user&#8217;s home directory and other machines on your network should now be able to see your webcam by visiting <a href="http://raspberrypi.local:8000/webcam.jpg">http://raspberrypi.local:8000/webcam.jpg</a>.  Note: this link relies on the <a href="http://en.wikipedia.org/wiki/Bonjour">Bonjour</a> support in the Occidentalis distro, you might have to type the Pi&#8217;s IP address instead.</p>
+
+<p>If you have a regular home internet connection, you will probably need to set up port forwarding on your router to make that webserver accessible to the outside world, rather than just your own home network, which is a bit of a drag (and instructions depend on your router, though there are a few <a href="https://www.google.com/search?q=raspberry+pi+webserver+router+port+forwarding">attempts at tutorials to be found</a>), so let&#8217;s look at how to use a webserver on the open internet.</p>
+
+<h3>webserver with ssh/scp access</h3>
+
+<p>If you have access to a webserver (e.g. <a href="http://www.linode.com/">linode</a> ) which allows you to connect via <code>ssh</code>, you can <a href="http://osxdaily.com/2012/05/25/how-to-set-up-a-password-less-ssh-login/">set up passwordless ssh</a> and add <code>;scp webcam.jpg your-server:/path/to/web/content</code> to the end of your crontab command to have cron upload the resulting image to your server after every snapshot. e.g.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*/15 * * * * fswebcam -r 960x720 -d /dev/video0 /home/pi/webcam.jpg;scp /home/pi/webcam.jpg linode:/var/www</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Advanced: use github pages (free)</h3>
+
+<p>The set up is a little involved, but this option is free.  The wonderful source control hosting service <a href="http://github.com">github</a> will host web content for you on their servers.  First, install <code>git</code> on your Raspberry Pi:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, if you don&#8217;t have one, create an account with <a href="http://github.com">github</a> and set up <a href="https://help.github.com/articles/generating-ssh-keys">shared ssh keys as described in this article</a>.  <code>pbcopy</code> may not work on the Pi, so when you get to that step do <code>cat ~/.ssh/id_rsa.pub</code> and copy the resulting output to the clipboard manually - you&#8217;ll need to use the web browser on the pi itself to complete the following step, or transfer that file to the computer you are working on somehow.</p>
+
+<p>Next, create a new github repository named <code>username.github.com</code> where username is the github username you just created (or your existing account).  Any files you push to this repository will automatically be served on http://username.github.com.  For the examples below, <code>flexobot</code> is my username - change it to your own.</p>
+
+<p>Let&#8217;s push the webcam image to github once to see how it all works.  On your Raspberry Pi, run the following commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd
+</span><span class='line'>$ git clone git@github.com:flexobot/flexobot.github.com.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>replacing <code>flexobot</code> with your user name, of course.
+You should see:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:flexobot/flexobot.github.com.git
+</span><span class='line'>Initialized empty Git repository in /home/pi/flexobot.github.com/.git/
+</span><span class='line'>remote: Counting objects: 3, done.
+</span><span class='line'>remote: Total 3 (delta 0), reused 0 (delta 0)
+</span><span class='line'>Receiving objects: 100% (3/3), done.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now run the following</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cp webcam.jpg flexobot.github.com/
+</span><span class='line'>$ cd flexobot.github.com/
+</span><span class='line'>$ git add .
+</span><span class='line'>$ git commit -a -m `date +%s`
+</span><span class='line'>$ git push origin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which copies the webcam image into the copy of the github repository on your Raspberry Pi, adds and commits the changed files and pushes them to github.  If things worked correctly, you&#8217;ll see</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Counting objects: 4, done.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% (3/3), done.
+</span><span class='line'>Writing objects: 100% (3/3), 320.74 KiB, done.
+</span><span class='line'>Total 3 (delta 0), reused 0 (delta 0)
+</span><span class='line'>To git@github.com:flexobot/flexobot.github.com.git
+</span><span class='line'>   a961da0..6909423  master -&gt; master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And navigating to the url <a href="http://flexobot.github.com/webcam.jpg">http://flexobot.github.com/webcam.jpg</a> will display your latest webcam image!  Note: github pages can take 15 mins or so to update on your first push, but it&#8217;s faster after that.</p>
+
+<p>Now, let&#8217;s automate that procedure every 15 mins.  We could simply copy all those commands to the end of the <code>crontab</code> entry, but that&#8217;s a little unwieldy, so let&#8217;s write a shell script to package it all up.</p>
+
+<figure class='code'><figcaption><span> (webcam.sh)</span> <a href='http://dps.github.com/downloads/code/webcam.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">GITUSER</span><span class="o">=</span><span class="s2">&quot;flexobot&quot;</span>
+</span><span class='line'>
+</span><span class='line'>fswebcam -r 960x720 -d /dev/video0 /home/pi/webcam.jpg
+</span><span class='line'>cp /home/pi/webcam.jpg /home/pi/<span class="nv">$GITUSER</span>.github.com/
+</span><span class='line'><span class="nb">cd</span> /home/pi/<span class="nv">$GITUSER</span>.github.com/
+</span><span class='line'>git add .
+</span><span class='line'>git commit -a -m <span class="sb">`</span>date +%s<span class="sb">`</span>
+</span><span class='line'>git push origin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save this file as <code>webcam.sh</code> in <code>/home/pi</code> - note that it automates both steps of taking an image and pushing it to github.  You&#8217;ll need to mark the file executable by the system.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chmod +x webcam.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s test it out manually to check it works:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./webcam.sh
+</span><span class='line'>--- Opening /dev/video0...
+</span><span class='line'>[master 8347ca2] 1356652754
+</span><span class='line'> 1 files changed, 0 insertions(+), 0 deletions(-)
+</span><span class='line'>Counting objects: 5, done.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% (3/3), done.
+</span><span class='line'>Writing objects: 100% (3/3), 323 bytes, done.
+</span><span class='line'>Total 3 (delta 1), reused 0 (delta 0)
+</span><span class='line'>To git@github.com:flexobot/flexobot.github.com.git
+</span><span class='line'>   6909423..8347ca2  master -&gt; master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can simply update the crontab to run this script instead of <code>fswebcam</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -e
+</span><span class='line'>...
+</span><span class='line'>*/15 * * * * /home/pi/webcam.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hurrah!  You&#8217;ve now learnt how to take photos with a USB webcam connected to a Raspberry Pi, some simple and advanced syntax for <code>cron</code> and <code>crontab</code> and how to push files to a webserver or github.</p>
+
+<p>(Advanced) Exercise for the reader: it should also be possible to host your webcam image on <a href="http://dropbox.com">Dropbox</a> by building their <a href="https://www.dropbox.com/help/247/en">linux daemon</a> from source code for the Raspberry Pi (the binaries they provide are not suitable for the ARM processor on the Pi).  Please <a href="mailto:davidsingleton%20at%20gmail.com">drop me a note</a> if you manage to do this successfully, I&#8217;ll give it a try in the New Year.</p>
+
+<p>Please leave any comments on <a href="https://plus.google.com/u/0/117098976115661643090/posts/C2FUa7hU5XU">this Google Plus post</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My BACON Talk: How I built a Neural Network controlled self driving (RC) car]]></title>
+    <link href="http://dps.github.com/my-bacon-talk-how-i-built-a-neural-network-controlled-self-driving-rc-car/"/>
+    <updated>2012-12-26T21:43:23+00:00</updated>
+    <id>http://dps.github.com/my-bacon-talk-how-i-built-a-neural-network-controlled-self-driving-rc-car</id>
+    <content type="html"><![CDATA[<p>The awesome folks over at <a href="http://devslovebacon.com/" title="devslovebacon" target="_blank">devslovebacon</a> have made my talk available on vimeo.  It&#8217;s a pretty good quality recording, hope you enjoy it.</p>
+
+
+<p><a href="http://vimeo.com/46432806"><img src="http://blog.davidsingleton.org/images/bacon.png" alt="" title="http://vimeo.com/46432806" width="500" height="280" class="alignnone size-full wp-image-119" /></a></p>
+
+<p><a href="http://vimeo.com/46432806">David Singleton - How I built a Neural Network controlled self driving (RC) car</a> from <a href="http://vimeo.com/user11456649">BACON: things developers love</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Living in the Future]]></title>
+    <link href="http://dps.github.com/living-in-the-future/"/>
+    <updated>2012-11-20T02:13:54+00:00</updated>
+    <id>http://dps.github.com/living-in-the-future</id>
+    <content type="html"><![CDATA[<p>Paul Graham&#8217;s latest essay - <a href="http://paulgraham.com/startupideas.html" target="_blank">How to get startup ideas</a> - is a great read.</p>
+
+<p>I was struck by the Bucheit/Pirsig conjecture:</p>
+
+<blockquote>&#8220;Live in the future, then build what&#8217;s missing.&#8221;</blockquote>
+
+
+<p>and the following paragraph regarding ideas that come out of folks&#8217; experience at college.</p>
+
+<p>pg encourages those readers who are still studying to take classes unrelated to their CS major so that they may see more problems worth solving.  In contrast, what struck me about this paragraph was how much, for me, college was like living in the future.  In the late nineties, I lived in an environment where every single member of my social circle had an always-on 10 Mbit connection to the Internet and spent inordinate amounts of time communicating via email, IM etc. It seems like no coincidence that so many successful Internet companies were born out of students of that era. I doubt that today&#8217;s students encounter the future of much at all in their dorm rooms. Perhaps universities should be working hard to make sure that campus living is more like living in the future than setting up mobile app development courses, incubators etc etc.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Parsing huge XML files with Go]]></title>
+    <link href="http://dps.github.com/parsing-huge-xml-files-with-go/"/>
+    <updated>2012-06-19T04:37:58+01:00</updated>
+    <id>http://dps.github.com/parsing-huge-xml-files-with-go</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve recently been messing around with the <a href="http://en.wikipedia.org/wiki/Wikipedia:Database_download">XML dumps of Wikipedia</a>.  These are pretty huge XML files - for instance the most recent revision is 36G when uncompressed.  That&#8217;s a lot of XML!  I&#8217;ve been experimenting with a few different languages and parsers for my task (which also happens to involve some non trivial processing for each article) and found <a href="http://www.golang.org/">Go</a> to be a great fit.</p>
+
+<p>Go has a <a href="http://golang.org/pkg/encoding/xml/">common library package for parsing xml</a> (encoding/xml) which is very convenient to code against.  However, the simple version of the API requires parsing the whole document in one go, which for 36G is not a viable strategy.   The parser can also be used in a streaming mode but I found the documentation and examples online to be terse and non-existant respectively, so here is my example code for parsing wikipedia with <b>encoding/xml</b> and a little explanation!</p>
+
+<p>(full example code at <a href="https://github.com/dps/go-xml-parse/blob/master/go-xml-parse.go">https://github.com/dps/go-xml-parse/blob/master/go-xml-parse.go</a>)</p>
+
+<p>Here&#8217;s a little snippet of an example wikipedia page in the doc:</p>
+
+<pre><span style=' color: Green;'>// &lt;page&gt;</span> 
+<span style=' color: Green;'>//     &lt;title&gt;Apollo 11&lt;/title&gt;</span> 
+<span style=' color: Green;'>//      &lt;redirect title="Foo bar" /&gt;</span> 
+<span style=' color: Green;'>//     ...</span> 
+<span style=' color: Green;'>//     &lt;revision&gt;</span> 
+<span style=' color: Green;'>//     ...</span> 
+<span style=' color: Green;'>//       &lt;text xml:space="preserve"&gt;</span> 
+<span style=' color: Green;'>//       &#123;&#123;Infobox Space mission</span> 
+<span style=' color: Green;'>//       |mission_name=&amp;lt;!--See above--&amp;gt;</span> 
+<span style=' color: Green;'>//       |insignia=Apollo_11_insignia.png</span> 
+<span style=' color: Green;'>//     ...</span> 
+<span style=' color: Green;'>//       &lt;/text&gt;</span> 
+<span style=' color: Green;'>//     &lt;/revision&gt;</span> 
+<span style=' color: Green;'>// &lt;/page&gt;</span></pre>
+
+
+<p>In our Go code, we define a struct to match the &lt;page&gt; element, its nested &lt;redirect&gt; element and grab a couple of fields we&#8217;re interested in (&lt;text&gt; and &lt;title&gt;).</p>
+
+<pre>type Redirect <span style="color: blue;">struct</span> { 
+    Title <span style="color: blue;">string</span> `xml:<span style="color: maroon;">"title,attr"</span>` 
+} 
+
+type Page <span style="color: blue;">struct</span> { 
+    Title <span style="color: blue;">string</span> `xml:<span style="color: maroon;">"title"</span>` 
+    Redir Redirect `xml:<span style="color: maroon;">"redirect"</span>` 
+    Text <span style="color: blue;">string</span> `xml:<span style="color: maroon;">"revision&gt;text"</span>` 
+}</pre>
+
+
+
+
+<p>Now we would usually tell the parser that a wikipedia dump contains a bunch of &lt;page&gt;s and try to read the whole thing, but let&#8217;s see how we stream it instead.</p>
+
+
+<p>  It&#8217;s quite simple when you know how - iterate over tokens in the file until you encounter a StartElement with the name &#8220;page&#8221; and then use the magic <code>decoder.DecodeElement</code> API to unmarshal the whole following page into an object of the Page type defined above.  Cool!</p>
+
+<pre>decoder := xml.NewDecoder(xmlFile) 
+
+<span style=' color: Blue;'>for</span> { 
+    <span style=' color: Green;'>// Read tokens from the XML document in a stream.</span> 
+    t, _ := decoder.Token() 
+    <span style=' color: Blue;'>if</span> t == nil { 
+        <span style=' color: Blue;'>break</span> 
+    } 
+    <span style=' color: Green;'>// Inspect the type of the token just read.</span> 
+    <span style=' color: Blue;'>switch</span> se := t.(type) { 
+    <span style=' color: Blue;'>case</span> xml.StartElement: 
+        <span style=' color: Green;'>// If we just read a StartElement token</span> 
+        <span style=' color: Green;'>// ...and its name is "page"</span> 
+        <span style=' color: Blue;'>if</span> se.Name.Local == <span style=' color: Maroon;'>"page"</span> { 
+            var p Page 
+            <span style=' color: Green;'>// decode a whole chunk of following XML into the</span>
+            <span style=' color: Green;'>// variable p which is a Page (se above)</span> 
+            decoder.DecodeElement(&amp;p, &amp;se) 
+            <span style=' color: Green;'>// Do some stuff with the page.</span> 
+            p.Title = CanonicalizeTitle(p.Title)
+            ...
+        } 
+...</pre>
+
+
+<p>I hope this saves you some time if you need to parse a huge XML file yourself.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hands on with Raspberry Pi]]></title>
+    <link href="http://dps.github.com/hands-on-with-raspberry-pi/"/>
+    <updated>2012-03-12T23:27:31+00:00</updated>
+    <id>http://dps.github.com/hands-on-with-raspberry-pi</id>
+    <content type="html"><![CDATA[<p>I was extremely fortunate to get access to a <a href="http://www.raspberrypi.org/" target="_blank">Raspberry Pi</a> alpha board for the past couple of weeks. For those of you who haven&#8217;t already heard about it, the Raspberry Pi project was started to provide a tiny computer for kids to learn to program. It&#8217;s a credit card sized computer with a 700 MHz ARM 11 CPU, 256 MB RAM, USB ports to connect a keyboard and mouse and HDMI out so you can plug it in to a TV or monitor - that&#8217;s enough power to run Linux, a web browser etc. What&#8217;s truly revolutionary is the price point - all of this comes for $25. At that price, the potential for a full blown computer in lots of homebrew embedded electronics projects could be transformational and the initial release of board for pre-order sold out in a matter of hours.</p>
+
+<p><img class="aligncenter" src="http://blog.davidsingleton.org/wp-content/uploads/2012/03/rpi.png" alt="rpi" /></p>
+
+<p>So, what&#8217;s it like in practice? I had a chance to play with the <a href="http://downloads.raspberrypi.org/images/debian/6/debian6-17-02-2012/debian6-17-02-2012.zip" target="_blank">Debian &#8220;squeeze&#8221;</a> distribution - the official Fedora based image was not yet available. Getting the image written onto an SD card (I recommend 4 GB min as the default image leaves not a lot of empty space to install new software on a 2 GB card) was simple enough following <a href="http://elinux.org/RPi_Easy_SD_Card_Setup" target="_blank">these instructions</a>. I decided that it would be fun to try to get my <a href="http://blog.davidsingleton.org/nnrccar" target="_blank">Neural Network controlled RC car</a> working on Raspberry Pi. The Rasp Pi team are working on an add on &#8221;<a href="http://www.raspberrypi.org/archives/411" target="_blank">Gertboard</a>&#8221; for I/O but since those aren&#8217;t available yet and the device already has USB ports, connecting an Arduino UNO board should work great, right? Well, yes, but the debian image doesn&#8217;t come with kernel driver support or prebuilt modules for the usb/serial interface Arduino uses. It took quite a bit of digging to find all the info I needed to build these myself, but I&#8217;ve made prebuilt modules available at the end of this post if you&#8217;d like to repeat this yourself.</p>
+
+<p>This also means that Rasp Pi can be a great development environment for anyone getting started with Arduino who doesn&#8217;t have an expensive PC to connect it to (e.g. at school).</p>
+
+<p>Next step was to get the Rasp Pi driving the car. After installing the default Java JVM (open jdk), I got the camera streaming to the board - the screen shot you can see here is live video from an android phone for the self-driving car&#8230; woo!</p>
+
+<p><img src="http://blog.davidsingleton.org/wp-content/uploads/2012/03/IMG_20120304_232938.jpg"/></p>
+
+<p>Unfortunately, openjdk does not do JIT (just in time compilation) on ARM, so the performance of this set up was not going to get fast enough to drive the car (it managed about 1 frame per second without the neural network running). This was just the inspiration I needed to re-implement the project in C++! So, after a few further evenings&#8217; work I was able to claim what I think is the world&#8217;s first self driving (RC) car powered by Raspberry Pi! The new C++ code can be found at <a href="https://github.com/dps/nnrccar/tree/master/cpp-driver">github.com/dps/nnrccar/tree/master/cpp-driver</a>.</p>
+
+<p>Overall impressions? Rasp Pi is not going to let the throng of enthusiasts awaiting delivery down - it&#8217;s enchanting to have a self contained fully fledged linux box and I know I&#8217;d have saved my pocket money to buy one when I was a kid. The Debian image had by no means a non-techy friendly setup process, but <a href="http://www.bbc.co.uk/news/technology-17190918">Eben has been very clear</a> that the software is expected to get much better now that the initial batch are being unleashed on an army of motivated geeks, and what I&#8217;ve read about the official Fedora Remix image so far sounds like it&#8217;s a big step in the right direction.</p>
+
+<p>I hope some of you also have fun with Arduino on this platform:</p>
+
+<p><strong>Arduino on Rasp Pi</strong></p>
+
+<p>Install the Arduino software
+<code>sudo apt-get install arduino</code></p>
+
+<p>Download the pre-built <a href="http://blog.davidsingleton.org/static/rpi_kernel_modules.zip">rasp pi / debian kernel modules</a> I built.</p>
+
+<p>Enable the modules</p>
+
+<pre>
+sudo insmod drivers/usb/class/cdc-acm
+sudo insmod drivers/usb/serial/usbserial
+sudo insmod drivers/usb/serial/ftdi_sio
+</pre>
+
+
+<p>Plug in your Arduino UNO.</p>
+
+<p>You should now have a USB serial port for the board on <code>/dev/ttyACMO</code>. Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[One nanosecond is to one second as one second is to 31.7 years]]></title>
+    <link href="http://dps.github.com/one-nanosecond-is-to-one-second-as-one-second-is-to-31-7-years/"/>
+    <updated>2012-02-19T17:45:06+00:00</updated>
+    <id>http://dps.github.com/one-nanosecond-is-to-one-second-as-one-second-is-to-31-7-years</id>
+    <content type="html"><![CDATA[<p><a href="http://www.flickr.com/photos/mrlins/6151504947/" title="Drops on green #1 by mrlins, on Flickr"><img src="http://farm7.staticflickr.com/6184/6151504947_d9670df924.jpg" width="500" height="354" alt="Drops on green #1"></a></p>
+
+<p><a href="https://plus.google.com/u/0/112493031290529814667/posts" target="_blank">Peter Burns</a> wrote a <a href="http://goo.gl/z4skG" target="_blank">great post</a> earlier last week about timescales as they might be &#8220;perceived&#8221; by a computer&#8217;s CPU&#8230; &#8220;your CPU lives by the nanosecond&#8221; [and humans live by the second].  The post seems to be loosely based on <a href="http://goo.gl/PaeGt" target="_blank">this article</a>.</p>
+
+<p>I found that the comparison really resonated with me and could provide a useful way to get an intuitive handle on the tradeoffs we make when designing software systems&#8230;</p>
+
+<p>A nano-second is one billionth of a second.</p>
+
+<p>Moderately fast modern CPUs can process a few instructions (e.g. comparing a couple of numbers) every nanosecond, much as humans can &#8220;process&#8221; a few basic facts every second (e.g. comparing a couple of numbers!).  This might blow your mind:  A nanosecond is to one second as one second is to 31.7 years!</p>
+
+<p>Peter&#8217;s comparisons talked only about the timescales it takes to shuffle data backwards and forwards within one computer (CPU, main memory, disk).  Many software systems nowadays consist of a collection of computers connected together by a fast network (within a datacenter) and often co-operating with services running on the other side of the globe to deliver the kinds of applications and services we&#8217;re used to using on the web.  Therefore, I thought it quite interesting to extend the analogy and think about some of the <a href="http://goo.gl/0KpSu" target="_blank">Numbers Everyone Should Know</a> (due to Jeff Dean) as if a nanosecond was a second.</p>
+
+<p><strong>L1 cache reference</strong> - 0.5 ns  -> <strong>half a second</strong>.<br/>
+<strong>Branch mispredict</strong> - 5 ns -> <strong>5 seconds</strong>.<br/>
+<strong>L2 cache reference</strong> - 7 ns -> <strong>7 seconds</strong>.<br/>
+<strong>Main memory reference</strong> - 100 ns -> <strong>1 minute 40 seconds</strong>.<br/></p>
+
+<p>Now it gets interesting:<br/></p>
+
+<p><strong>Send 2K bytes over 1 Gbps network</strong> - 20,000 ns -> <strong>5 and a half hours</strong>.<br/>
+<strong>Read 1 MB sequentially from memory</strong> - 250,000 ns -> <strong>nearly 3 days</strong>.<br/>
+<strong>Round trip within same datacenter</strong>  - 500,000 ns -> <strong>nearly 6 days</strong>.<br/>
+<strong>Disk seek</strong> - 10,000,000 ns -> <strong>4 months</strong><br/>
+<strong>Read 1 MB sequentially from disk</strong> - 20,000,000 ns -> <strong>8 months</strong>.<br/>
+<strong>Send packet California->Europe->California</strong> - 150,000,000 ns -> <strong>4.75 years</strong>.<br/></p>
+
+<p>The most significant (and perhaps initially unintuitive) of these is that it can be significantly faster to read data from RAM on another nearby machine via the network (6 days) rather than seek to it on local disk (8 months).</p>
+
+<p>I&#8217;ll throw one more in there:  <a href="http://goo.gl/jknNJ" target="_blank">round trip across a 3G mobile network</a>: 250,000,000 ns -> <strong>nearly 8 years</strong>!</p>
+
+<p>What&#8217;s the point of thinking like this?  Well, by putting timescales into units that humans can more intuitively understand and reason about, I hope this might help me (and you) make better choices as we design new systems.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How I built a self-driving (RC) car and you can too!]]></title>
+    <link href="http://dps.github.com/how-i-built-a-self-driving-rc-car-and-you-can-too/"/>
+    <updated>2012-01-02T21:46:49+00:00</updated>
+    <id>http://dps.github.com/how-i-built-a-self-driving-rc-car-and-you-can-too</id>
+    <content type="html"><![CDATA[<iframe width="560" height="315" src="http://www.youtube.com/embed/DWNtsS2kZWs" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Recently, I have been refreshing my knowledge of Machine Learning by taking <a href="http://www.cs.stanford.edu/people/ang/">Andrew Ng</a>&#8217;s excellent Stanford <a href="http://www.ml-class.org/">Machine Learning course</a> online. The lecture module on <a href="http://en.wikipedia.org/wiki/Neural_network">Neural Networks</a> ends with an intriging motivating <a href="http://academicearth.org/lectures/supervised-learning-autonomous-deriving">video</a> of the <a href="http://ftp.utcluj.ro/pub/docs/imaging/Autonomous_driving/Articole%20sortate/CThorpe/ALVINN%20Project%20Home%20Page.htm">ALVINN</a> autonomous car driving itself along normal roads at <a href="http://www.ri.cmu.edu/research_project_detail.html?project_id=160&amp;menu_id=261">CMU</a> in the mid 90s.</p>
+
+<p>I was inspired by this video to see what I could build myself over the course of a weekend.</p>
+
+<p><a title="How I built a self-driving (RC) car and you can too!" href="http://blog.davidsingleton.org/nnrccar">Read the full article here</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[unhumanize.py is a simple python library to convert humanized time intervals (e.g. 'an hour ago') into timedeltas]]></title>
+    <link href="http://dps.github.com/unhumanize-py-is-a-simple-python-library-to-convert-humanized-time-intervals-e-g-an-hour-ago-into-timedeltas/"/>
+    <updated>2011-08-29T17:49:31+01:00</updated>
+    <id>http://dps.github.com/unhumanize-py-is-a-simple-python-library-to-convert-humanized-time-intervals-e-g-an-hour-ago-into-timedeltas</id>
+    <content type="html"><![CDATA[<div>
+                
+    <p>
+    <a href="https://github.com/dps/unhumanize">https://github.com/dps/unhumanize</a>
+</p>
+
+            </div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why mobile apps suck when you're mobile.]]></title>
+    <link href="http://dps.github.com/why-mobile-apps-suck-when-youre-mobile/"/>
+    <updated>2011-06-26T22:31:56+01:00</updated>
+    <id>http://dps.github.com/why-mobile-apps-suck-when-youre-mobile</id>
+    <content type="html"><![CDATA[<div>
+<span style="line-height: normal;">In 2011, Smartphones are ubiquitous and everyone and his dog is writing mobile apps, but using apps when you&#8217;re not in range of a fixed wifi hotspot or standing still in an urban area is often extremely frustrating. How often have you tried to refresh and found yourself staring at an interminable spinner that makes you want to throw your phone at the wall? Here&#8217;s why (and a plea to app developers to do something about it!)</span>
+<a href="http://blog.davidsingleton.org/mobiletcp"><span style="line-height: normal;">Read More</span></a>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino temperature logging]]></title>
+    <link href="http://dps.github.com/arduino-temperature-logging/"/>
+    <updated>2011-03-06T22:24:58+00:00</updated>
+    <id>http://dps.github.com/arduino-temperature-logging</id>
+    <content type="html"><![CDATA[<p><img src="https://sites.google.com/a/davidsingleton.org/www2/_/rsrc/1299450134972/arduino-remote-data-logging/g.png?height=240&amp;width=320" alt="" />
+This graph shows the result of my weekend project - it&#8217;s the temperature in my living room, logged to an app running on <a href="http://appengine.google.com/" target="_blank">Google Appengine</a> every 30s via an Arduino UNO with ethernet shield.  I&#8217;m building out this project to be a little more generic and then will share the details so others can do the same.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Arduino PS2 Mouse controlled RC car!]]></title>
+    <link href="http://dps.github.com/arduino-ps2-mouse-controlled-rc-car/"/>
+    <updated>2011-02-27T23:40:39+00:00</updated>
+    <id>http://dps.github.com/arduino-ps2-mouse-controlled-rc-car</id>
+    <content type="html"><![CDATA[<p>I spent the weekend learning how to hack hardware with Arduino -  I built this mouse controlled RC car.  Fun to build and fun to play with!</p>
+
+<iframe title="YouTube video player" src="http://www.youtube.com/embed/4VM1odP5Qz8" frameborder="0" width="480" height="390"></iframe>
+
+
+<p>Read the detailed <a href="https://sites.google.com/a/davidsingleton.org/www2/arduino-ps2-mouse-controlled-rc-car" target="_blank">HOWTO</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DODOcase factory tour]]></title>
+    <link href="http://dps.github.com/dodocase-factory-tour/"/>
+    <updated>2011-02-13T19:34:30+00:00</updated>
+    <id>http://dps.github.com/dodocase-factory-tour</id>
+    <content type="html"><![CDATA[<p>On my latest trip to San Francisco, I was privileged to be able to drop in to the <a href="http://www.dodocase.com/" target="_blank">DODOcase</a> factory and got a guided tour from chief DODO - <a href="http://www.linkedin.com/in/patrickreganbuckley" target="_blank">Patrick</a>. DODOcase use traditional bookbinding techniques (at a long-established local book binder) to produce a really neat book-like case for iPad and Kindle 3.
+<img src="https://sites.google.com/a/davidsingleton.org/www2/_/rsrc/1297393521812/dodo/photo%205.JPG?height=239&amp;width=320" alt="" /></p>
+
+<p>Patrick gave me a tour of their production facilities. In addition to the local book binder, they work with a nearby workshop which employs disabled San Franciscans who build the DODOcase frames by hand and attach them to the outers made at the book binder. It was impressive to see how DODOcase is helping provide work for their local community while turning out a top-quality product.</p>
+
+<p><img src="http://cdn.shopify.com/s/files/1/0046/6182/products/dodocase-560-kindle.jpg?1294656774" alt="" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HowTo: Make a REAL BOOK Kindle cover]]></title>
+    <link href="http://dps.github.com/howto-make-a-real-book-kindle-cover/"/>
+    <updated>2011-01-03T21:25:55+00:00</updated>
+    <id>http://dps.github.com/howto-make-a-real-book-kindle-cover</id>
+    <content type="html"><![CDATA[<p>I love reading on my Kindle, but as anyone who has been using one for a while knows, it feels too delicate to drop straight into a bag and really needs a case. So, I need a case, but I want one that actually makes the Kindle look like a book - enough to make the person sitting opposite me on the tube take no notice of my fancy e-reader and prevent cabin crew bothering me to turn it &#8220;off&#8221; for take off and landing. So it&#8217;s going to need to have edges that look like pages and be book shaped&#8230; I thought, <a href="http://blog.davidsingleton.org/kindle">why not start with a real book and hack it to perfectly cradle a Kindle</a>
+<img src="https://sites.google.com/a/davidsingleton.org/www2/_/rsrc/1294086565163/kindle-real-book-case/kindle-real-book-case-2/kindle-real-book-case/photo%204.JPG?height=149&amp;width=200" alt="" /></p>
+
+<p>&#8230;and thus went my weekend.  But, after two days of hacking, I&#8217;ve written it all up <a href="http://blog.davidsingleton.org/kindle" target="_blank">here</a></p>
+]]></content>
+  </entry>
+  
+</feed>

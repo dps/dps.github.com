@@ -1,0 +1,227 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Parsing huge XML files with Go - david singleton</title>
+	<meta name="author" content="David Singleton">
+
+	
+	<meta name="description" content="I&#8217;ve recently been messing around with the XML dumps of Wikipedia.  These are pretty huge XML files - for instance the most recent revision is &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="david singleton" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://dps.github.com/parsing-huge-xml-files-with-go/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><!-- <div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div> -->
+<h1><a href="/">david singleton</a></h1>
+<p class="subtitle">Flurries of latent creativity</p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/mobiletcp">Why mobile apps suck when you're mobile</a></li>
+	<li><a href="/nnrccar">How I built a self-driving (RC) car and you can too</a></li>
+	<li><a href="/kindle">HowTo: Kindle real book case</a></li>
+	<li><a href="/sudoku">Shortest Sudoku</a></li>
+	<li>&nbsp;</li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li>&nbsp;</li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/117098976115661643090?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/dps" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dps" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div id="banner" class="inner">
+        <div>
+          <a href=""><img src="/images/header.jpg" /></a>
+        </div>
+
+</div>
+
+
+
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Parsing Huge XML Files With Go</h1>
+	<div class="entry-content"><p>I&#8217;ve recently been messing around with the <a href="http://en.wikipedia.org/wiki/Wikipedia:Database_download">XML dumps of Wikipedia</a>.  These are pretty huge XML files - for instance the most recent revision is 36G when uncompressed.  That&#8217;s a lot of XML!  I&#8217;ve been experimenting with a few different languages and parsers for my task (which also happens to involve some non trivial processing for each article) and found <a href="http://www.golang.org/">Go</a> to be a great fit.</p>
+
+<p>Go has a <a href="http://golang.org/pkg/encoding/xml/">common library package for parsing xml</a> (encoding/xml) which is very convenient to code against.  However, the simple version of the API requires parsing the whole document in one go, which for 36G is not a viable strategy.   The parser can also be used in a streaming mode but I found the documentation and examples online to be terse and non-existant respectively, so here is my example code for parsing wikipedia with <b>encoding/xml</b> and a little explanation!</p>
+
+<p>(full example code at <a href="https://github.com/dps/go-xml-parse/blob/master/go-xml-parse.go">https://github.com/dps/go-xml-parse/blob/master/go-xml-parse.go</a>)</p>
+
+<p>Here&#8217;s a little snippet of an example wikipedia page in the doc:</p>
+
+<pre><span style=' color: Green;'>// &lt;page&gt;</span> 
+<span style=' color: Green;'>//     &lt;title&gt;Apollo 11&lt;/title&gt;</span> 
+<span style=' color: Green;'>//      &lt;redirect title="Foo bar" /&gt;</span> 
+<span style=' color: Green;'>//     ...</span> 
+<span style=' color: Green;'>//     &lt;revision&gt;</span> 
+<span style=' color: Green;'>//     ...</span> 
+<span style=' color: Green;'>//       &lt;text xml:space="preserve"&gt;</span> 
+<span style=' color: Green;'>//       &#123;&#123;Infobox Space mission</span> 
+<span style=' color: Green;'>//       |mission_name=&amp;lt;!--See above--&amp;gt;</span> 
+<span style=' color: Green;'>//       |insignia=Apollo_11_insignia.png</span> 
+<span style=' color: Green;'>//     ...</span> 
+<span style=' color: Green;'>//       &lt;/text&gt;</span> 
+<span style=' color: Green;'>//     &lt;/revision&gt;</span> 
+<span style=' color: Green;'>// &lt;/page&gt;</span></pre>
+
+
+<p>In our Go code, we define a struct to match the &lt;page&gt; element, its nested &lt;redirect&gt; element and grab a couple of fields we&#8217;re interested in (&lt;text&gt; and &lt;title&gt;).</p>
+
+<pre>type Redirect <span style="color: blue;">struct</span> { 
+    Title <span style="color: blue;">string</span> `xml:<span style="color: maroon;">"title,attr"</span>` 
+} 
+
+type Page <span style="color: blue;">struct</span> { 
+    Title <span style="color: blue;">string</span> `xml:<span style="color: maroon;">"title"</span>` 
+    Redir Redirect `xml:<span style="color: maroon;">"redirect"</span>` 
+    Text <span style="color: blue;">string</span> `xml:<span style="color: maroon;">"revision&gt;text"</span>` 
+}</pre>
+
+
+
+
+<p>Now we would usually tell the parser that a wikipedia dump contains a bunch of &lt;page&gt;s and try to read the whole thing, but let&#8217;s see how we stream it instead.</p>
+
+
+<p>  It&#8217;s quite simple when you know how - iterate over tokens in the file until you encounter a StartElement with the name &#8220;page&#8221; and then use the magic <code>decoder.DecodeElement</code> API to unmarshal the whole following page into an object of the Page type defined above.  Cool!</p>
+
+<pre>decoder := xml.NewDecoder(xmlFile) 
+
+<span style=' color: Blue;'>for</span> { 
+    <span style=' color: Green;'>// Read tokens from the XML document in a stream.</span> 
+    t, _ := decoder.Token() 
+    <span style=' color: Blue;'>if</span> t == nil { 
+        <span style=' color: Blue;'>break</span> 
+    } 
+    <span style=' color: Green;'>// Inspect the type of the token just read.</span> 
+    <span style=' color: Blue;'>switch</span> se := t.(type) { 
+    <span style=' color: Blue;'>case</span> xml.StartElement: 
+        <span style=' color: Green;'>// If we just read a StartElement token</span> 
+        <span style=' color: Green;'>// ...and its name is "page"</span> 
+        <span style=' color: Blue;'>if</span> se.Name.Local == <span style=' color: Maroon;'>"page"</span> { 
+            var p Page 
+            <span style=' color: Green;'>// decode a whole chunk of following XML into the</span>
+            <span style=' color: Green;'>// variable p which is a Page (se above)</span> 
+            decoder.DecodeElement(&amp;p, &amp;se) 
+            <span style=' color: Green;'>// Do some stuff with the page.</span> 
+            p.Title = CanonicalizeTitle(p.Title)
+            ...
+        } 
+...</pre>
+
+
+<p>I hope this saves you some time if you need to parse a huge XML file yourself.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2015
+
+    David Singleton
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+<script type="text/javascript" src="http://webalert.davidsingleton.org/static/track.js"></script>
+<script type="text/javascript">
+_wa_track("ugNnRayKsDHYpTIipboSihcuKl");
+</script>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Why mobile apps suck when you're mobile (TCP over 3G)</title>
+</head>
+<body>
+<h2>Why mobile apps suck when you're mobile.</h2>
+<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dps">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" data-url="http://blog.davidsingleton.org/mobiletcp/"></script>
+<p>In 2011, Smartphones are ubiquitous and everyone and his dog is writing mobile apps, but using apps when you're not in range of a fixed wifi hotspot or standing still in an urban area is often extremely frustrating.  How often have you tried to refresh and found yourself staring at an interminable spinner that makes you want to throw your phone at the wall?  Here's why (and a plea to app developers to do something about it!)</p>
+<img src="/static/images/rtts.png">
+<p>The graph above shows the round-trip time (RTT) for 1000 IP packets I traced over a supposed super-fast HSDPA connection while travelling on a train in the UK.  All the while, my phone had signal, though it was switching pretty frequently from HSDPA to (still supposedly broadband-speed) 3G.  <b>But apps on the phone were totally useless for anything involving a network connection - refreshing resulted in nothing more than a spinner</b>.</p>
+<p>What can we see here?
+<ul>
+  <li><b>The connection is relatively good at sending and receiving data.</b>  The green crosses represent packets that were actually lost which only happened for 75 of 1000.
+  <li><b>There are some crazy-high round trip times.</b>  The minimum round trip time was 107ms (which would put my home cable connection to shame) and even the median is pretty awesome at 239ms but the maximum was a whopping 20226 ms - that's more than 20 seconds!
+</ul>
+<p>On wired connections, such a long RTT as 20s just wouldn't be seen, so what's going on?  The underlying radio connection is flaky, but 3G data connections make their own attempt at implementing reliable delivery.  So when the radio link comes back, buffered packets will still make it to/from the device. Hooray, we've compensated for the flaky radio connection and all those great apps should work great, right?  Wrong.</p><p>Most apps communicate with the services they depend on in the cloud via HTTP which in turn uses a TCP connection to transfer data reliably and have the parts of every request and response show up in the right order.  TCP gives us reliability by re-transmitting packets which haven't been acknowledged (i.e. a corresponding packet returned from the other end of the link) within its estimate of the round-trip time of the connection.  TCP assumes that the connection has a more or less constant RTT and assumes delays are losses due to congestion somewhere on the path from A to B.  To avoid overloading the network and give the congestion a chance to clear, TCP <b>backs off</b> - waiting longer and longer on each loss to send the next packet.</p><p>On our mobile link, with an underlying reliable data connection but with highly variable delay, there is little/no loss and no congestion, but of course TCP doesn't know that and backs off making the connection our apps see next-to-useless.  The same effect means that running TCP over TCP (with or without a mobile link underneath) is also a bad idea, as described in this excellent article by Olaf Titz: <a href="http://sites.inka.de/bigred/devel/tcp-tcp.html">Why TCP over TCP is a bad idea</a>.</p>
+<p>
+So what can you do as a mobile developer?  I'm not suggesting that everyone should go out and implement their own proprietary reliable-but-delay-tolerant protocol over UDP - you're unlikely to do a better job than TCP (though maybe <b>somebody</b> should :-) ), but there are a couple of practical things you could try.  In the above trace, you can probably see that established TCP connections which haven't managed to transfer data yet (due to lots of exponential backing off) are unlikely to recover and when the underlying connection &quot;comes back&quot; will not perform as well as a newly established TCP connection.  If your application needs to transfer relatively small amounts of data in response to a user action you could try setting aggressive timeouts and retrying with new TCP connections.  You may also choose to avoid the system's HTTP stack and open TCP sockets directly, since the system stack will often re-use an already established HTTP connection to the same host - a great idea in a system with constant delay since the TCP connection will already be &quot;up to speed&quot;, but not so great in the conditions above.  If you do this, you'll probably want to keep track of the type of connection in use and only apply these tweaks when on a mobile link.  Most mobile app platforms provide a mechanism to discover the underlying link type (for example Android's <a href="http://developer.android.com/reference/android/net/ConnectivityManager.html">ConnectivityManager</a>).  More importantly, this is (another) reason to build a great offline / flaky mode for your app so that users aren't quite so frustrated by those spinners.</li>
+</ul>
+</p>
+<p><a href="mailto:davidsingleton<at>gmail.com">David Singleton</a> <a href="http://www.twitter.com/dps">@dps</a></p>
+
+<p>Here's a closer look at the variance in RTT - the y-axis is a log scale.</p>
+<img src="/static/images/rtts_log.png"/>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9924635684739856";
+/* mobiletcp */
+google_ad_slot = "0631023289";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-697655-9']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

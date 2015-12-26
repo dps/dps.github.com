@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: electronics | david singleton]]></title>
+  <link href="http://dps.github.com/blog/categories/electronics/atom.xml" rel="self"/>
+  <link href="http://dps.github.com/"/>
+  <updated>2015-12-26T21:21:14+00:00</updated>
+  <id>http://dps.github.com/</id>
+  <author>
+    <name><![CDATA[David Singleton]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Northbelt]]></title>
+    <link href="http://dps.github.com/the-northbelt/"/>
+    <updated>2014-09-01T20:53:00+01:00</updated>
+    <id>http://dps.github.com/the-northbelt</id>
+    <content type="html"><![CDATA[<p>Recently I read <a href="http://archive.wired.com/wired/archive/15.04/esp.html">this old WIRED article</a> linked on a dicussion forum.</p>
+
+<p>It kindof blew my mind. For a while in 2004, a man in Germany wore a belt which continuously gave tactile feedback indicating which direction was north, and he developed a sixth sense of direction.</p>
+
+<p><i>
+&quot;On a visit to Hamburg, about 100 miles away, he noticed that he was conscious of the direction of his hometown. Wächter felt the vibration in his dreams, moving around his waist, just like when he was awake.&quot;</i></p>
+
+<p>So obviously, I had to have a magical north pointing belt myself.  There are a bunch of project pages across the web of folks who have made their own, but they were all pretty old and bulky, so I've started a little project to build one using slightly more up to date parts.  It's currently a work in progress, but here's a picture of the breadboard prototype.</p>
+
+<p><img src="http://dps.github.com/images/breadboard.png" /></p>
+
+<p>You can follow along with my progress in this github repo:  <a href="https://github.com/dps/northbelt">https://github.com/dps/northbelt</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fitbit for Bonsai Trees]]></title>
+    <link href="http://dps.github.com/fitbit-for-bonsai-trees/"/>
+    <updated>2013-08-06T19:50:00+01:00</updated>
+    <id>http://dps.github.com/fitbit-for-bonsai-trees</id>
+    <content type="html"><![CDATA[<p>Things have been kindof busy lately but I've been on-again / off-again working on a little project to wirelessly track the temperature, light level and soil moisture of my bonsai tree, so I can track its progress and know when to water (and more importantly, when not to).</p>
+
+<p><img src="http://dps.github.com/images/bonsai.jpg" /></p>
+
+<p>I'm using a <a href="http://blog.davidsingleton.org/wixel/">Pololu Wixel</a> as the brains of this device. The picture above is of the first prototype, built out on a permaproto board with a huge enclosure and a wired connection to the sensors.  This prompted my previous blog post on the Wixel in general and how to get it to sleep in low power modes to maximize battery life.  I also experimented with a solar panel to provide power which worked nicely in direct sunlight but would need to be <a href="http://www.sensorsmag.com/networking-communications/energy-harvesting/using-a-small-solar-cell-and-a-supercapacitor-a-wireless-sen-7310">augmented with a big capacitor</a> and a harvesting set up to cope with San Francisco's cloudy days (and nights!), so I decided to go in a different direction - to operate with low power draw and in a small package using a single AA battery, and eventually to swap out the Wixel and use a <a href="http://www.ti.com/product/cc2511f32">CC2511</a> directly on the device itself.</p>
+
+<p>This past weekend I finally got time to work on the project again and managed to layout a schematic and PCB for prototype number 2, which will essentially be a Wixel shield but get power supply, board and sensors down into a single small package.  I used Sketchup to visualize the 3D layout of components in the little package and to design a case which I'll be 3D printing this week.</p>
+
+<p><img src="http://dps.github.com/images/board.png" /> <br/>
+<img src="http://dps.github.com/images/wcase.png" />
+<img src="http://dps.github.com/images/wcomp.png" /></p>
+
+<!-- more -->
+
+
+<p>I'm experimenting with a Linear <a href="http://www.linear.com/product/LTC3525">LTC3525</a> to step up the AA voltage to  3.3V the CC2511 requires, which will test my surface mount <a href="https://www.sparkfun.com/tutorials/96">soldering skills</a>.  Grab the PCB design <a href="http://fritzing.org/projectswixel-bonsai-tracker">here</a>.</p>
+
+<p>Finally, I'm using another Wixel connected to a Raspberry Pi to collect the sensor data (this lives indoors) and have set up an instance of <a href="http://graphite.wikidot.com/">graphite</a> to receive and retrieve the timeseries data.  Here's a sneak peek at the data coming out of prototype number 1:</p>
+
+<p><img src="http://dps.github.com/images/graphs.png" /></p>
+]]></content>
+  </entry>
+  
+</feed>

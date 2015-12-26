@@ -1,0 +1,173 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Wixel - david singleton</title>
+	<meta name="author" content="David Singleton">
+
+	
+	<meta name="description" content="I&#8217;m working on a project (more soon!) which needs to sample a few sensors and send data wirelessly at low power. After testing out an Arduino &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="david singleton" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://dps.github.com/wixel/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><!-- <div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div> -->
+<h1><a href="/">david singleton</a></h1>
+<p class="subtitle">Flurries of latent creativity</p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/mobiletcp">Why mobile apps suck when you're mobile</a></li>
+	<li><a href="/nnrccar">How I built a self-driving (RC) car and you can too</a></li>
+	<li><a href="/kindle">HowTo: Kindle real book case</a></li>
+	<li><a href="/sudoku">Shortest Sudoku</a></li>
+	<li>&nbsp;</li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li>&nbsp;</li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/117098976115661643090?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/dps" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dps" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div id="banner" class="inner">
+        <div>
+          <a href=""><img src="/images/header.jpg" /></a>
+        </div>
+
+</div>
+
+
+
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Wixel</h1>
+	<div class="entry-content"><p>I&#8217;m working on a project (more soon!) which needs to sample a few sensors and send data wirelessly at low power.  After testing out an Arduino Uno + Bluetooth shield (too flaky, too bulky) and deciding that all the <a href="http://en.wikipedia.org/wiki/Bluetooth_low_energy">BLE</a> solutions out there are not quite ready yet (though some <a href="http://www.kickstarter.com/projects/kytelabs/bleduino-bluetooth-40-ble-made-easy-arduino-compat">look promising</a>), I discovered the <a href="http://www.pololu.com/catalog/product/1336">Pololu Wixel</a>.  I bought mine from <a href="https://www.sparkfun.com/products/10665">Sparkfun</a> at $20 each - you&#8217;ll need at least 2 since the RF protocol is proprietary.</p>
+
+<p><img src="/images/wixel_key.png" /></p>
+
+<p>The Wixel is a tiny dev board using the TI <a href="http://www.ti.com/product/cc2511f32">CC2511F32</a> System-on-Chip.  The CC2511 supports wireless comms via a proprietary 2.4 GHz RF protocol and includes an 8051 CPU core and built-in USB.  The CC2511F32 is <em>really</em> cheap and Pololu have done a nice job of packaging it on a 1.5 x 0.75 inch PCB which includes a USB mini connector and RF antenna.  They have also created an easy to use SDK for developing apps in C and flashing the board.</p>
+
+<!-- more -->
+
+
+<p><img src="/images/wixelconf.png" /></p>
+
+<p>The CC2511F32 has 19 GPIO pins and an analogue-to-digital converter so I was able to use it as a complete replacement for an Arduino or similar in my remote sensing project.</p>
+
+<p>The CC2511F32 draws tens of milliamps when active (the wixel more, since it contains a 3.3V regulator) but supports a few different low power modes which can turn off various parts of the SoC to achieve consumption down to 0.3 microamps.  None of the official wixel examples demonstrate using the low power modes of the SoC.  I did find a useful post by <a href="http://ublo.ro/wixel-pm3-low-power-sleep-mode-cc2511f32/">bogdaniel</a> on how to use PM3, but it took quite a lot of trial and error to get PM2 (lowest power mode which can be woken from on the system sleep timer) and the sleep timer working, so I have published a <a href="https://github.com/dps/wixel/blob/master/apps/low_power/low_power.c">low_power</a> example on github and a little <a href="http://www.youtube.com/watch?v=qkyD82yz60w">demo video</a> on youtube.</p>
+
+<p>The Wixel is pretty cool, but excitingly, TI have an updated version of the CC2511 family with BLE built in instead of proprietary RF - the <a href="http://www.ti.com/product/cc2540">CC2540</a>.  I hope Pololu, or some enterprising Kickstarters, develop a CC2540 dev board which is as easy to use as the Wixel in future.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2015
+
+    David Singleton
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+<script type="text/javascript" src="http://webalert.davidsingleton.org/static/track.js"></script>
+<script type="text/javascript">
+_wa_track("ugNnRayKsDHYpTIipboSihcuKl");
+</script>
+		</div>
+	</div>
+</body>
+</html>

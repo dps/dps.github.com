@@ -1,0 +1,194 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hands on with Raspberry Pi - david singleton</title>
+	<meta name="author" content="David Singleton">
+
+	
+	<meta name="description" content="I was extremely fortunate to get access to a Raspberry Pi alpha board for the past couple of weeks. For those of you who haven&#8217;t already heard &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="david singleton" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://dps.github.com/hands-on-with-raspberry-pi/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><!-- <div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div> -->
+<h1><a href="/">david singleton</a></h1>
+<p class="subtitle">Flurries of latent creativity</p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/mobiletcp">Why mobile apps suck when you're mobile</a></li>
+	<li><a href="/nnrccar">How I built a self-driving (RC) car and you can too</a></li>
+	<li><a href="/kindle">HowTo: Kindle real book case</a></li>
+	<li><a href="/sudoku">Shortest Sudoku</a></li>
+	<li>&nbsp;</li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li>&nbsp;</li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/117098976115661643090?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/dps" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dps" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div id="banner" class="inner">
+        <div>
+          <a href=""><img src="/images/header.jpg" /></a>
+        </div>
+
+</div>
+
+
+
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Hands on With Raspberry Pi</h1>
+	<div class="entry-content"><p>I was extremely fortunate to get access to a <a href="http://www.raspberrypi.org/" target="_blank">Raspberry Pi</a> alpha board for the past couple of weeks. For those of you who haven&#8217;t already heard about it, the Raspberry Pi project was started to provide a tiny computer for kids to learn to program. It&#8217;s a credit card sized computer with a 700 MHz ARM 11 CPU, 256 MB RAM, USB ports to connect a keyboard and mouse and HDMI out so you can plug it in to a TV or monitor - that&#8217;s enough power to run Linux, a web browser etc. What&#8217;s truly revolutionary is the price point - all of this comes for $25. At that price, the potential for a full blown computer in lots of homebrew embedded electronics projects could be transformational and the initial release of board for pre-order sold out in a matter of hours.</p>
+
+<p><img class="aligncenter" src="http://blog.davidsingleton.org/wp-content/uploads/2012/03/rpi.png" alt="rpi" /></p>
+
+<p>So, what&#8217;s it like in practice? I had a chance to play with the <a href="http://downloads.raspberrypi.org/images/debian/6/debian6-17-02-2012/debian6-17-02-2012.zip" target="_blank">Debian &#8220;squeeze&#8221;</a> distribution - the official Fedora based image was not yet available. Getting the image written onto an SD card (I recommend 4 GB min as the default image leaves not a lot of empty space to install new software on a 2 GB card) was simple enough following <a href="http://elinux.org/RPi_Easy_SD_Card_Setup" target="_blank">these instructions</a>. I decided that it would be fun to try to get my <a href="http://blog.davidsingleton.org/nnrccar" target="_blank">Neural Network controlled RC car</a> working on Raspberry Pi. The Rasp Pi team are working on an add on &#8221;<a href="http://www.raspberrypi.org/archives/411" target="_blank">Gertboard</a>&#8221; for I/O but since those aren&#8217;t available yet and the device already has USB ports, connecting an Arduino UNO board should work great, right? Well, yes, but the debian image doesn&#8217;t come with kernel driver support or prebuilt modules for the usb/serial interface Arduino uses. It took quite a bit of digging to find all the info I needed to build these myself, but I&#8217;ve made prebuilt modules available at the end of this post if you&#8217;d like to repeat this yourself.</p>
+
+<p>This also means that Rasp Pi can be a great development environment for anyone getting started with Arduino who doesn&#8217;t have an expensive PC to connect it to (e.g. at school).</p>
+
+<p>Next step was to get the Rasp Pi driving the car. After installing the default Java JVM (open jdk), I got the camera streaming to the board - the screen shot you can see here is live video from an android phone for the self-driving car&#8230; woo!</p>
+
+<p><img src="http://blog.davidsingleton.org/wp-content/uploads/2012/03/IMG_20120304_232938.jpg"/></p>
+
+<p>Unfortunately, openjdk does not do JIT (just in time compilation) on ARM, so the performance of this set up was not going to get fast enough to drive the car (it managed about 1 frame per second without the neural network running). This was just the inspiration I needed to re-implement the project in C++! So, after a few further evenings&#8217; work I was able to claim what I think is the world&#8217;s first self driving (RC) car powered by Raspberry Pi! The new C++ code can be found at <a href="https://github.com/dps/nnrccar/tree/master/cpp-driver">github.com/dps/nnrccar/tree/master/cpp-driver</a>.</p>
+
+<p>Overall impressions? Rasp Pi is not going to let the throng of enthusiasts awaiting delivery down - it&#8217;s enchanting to have a self contained fully fledged linux box and I know I&#8217;d have saved my pocket money to buy one when I was a kid. The Debian image had by no means a non-techy friendly setup process, but <a href="http://www.bbc.co.uk/news/technology-17190918">Eben has been very clear</a> that the software is expected to get much better now that the initial batch are being unleashed on an army of motivated geeks, and what I&#8217;ve read about the official Fedora Remix image so far sounds like it&#8217;s a big step in the right direction.</p>
+
+<p>I hope some of you also have fun with Arduino on this platform:</p>
+
+<p><strong>Arduino on Rasp Pi</strong></p>
+
+<p>Install the Arduino software
+<code>sudo apt-get install arduino</code></p>
+
+<p>Download the pre-built <a href="http://blog.davidsingleton.org/static/rpi_kernel_modules.zip">rasp pi / debian kernel modules</a> I built.</p>
+
+<p>Enable the modules</p>
+
+<pre>
+sudo insmod drivers/usb/class/cdc-acm
+sudo insmod drivers/usb/serial/usbserial
+sudo insmod drivers/usb/serial/ftdi_sio
+</pre>
+
+
+<p>Plug in your Arduino UNO.</p>
+
+<p>You should now have a USB serial port for the board on <code>/dev/ttyACMO</code>. Enjoy!</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2015
+
+    David Singleton
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+<script type="text/javascript" src="http://webalert.davidsingleton.org/static/track.js"></script>
+<script type="text/javascript">
+_wa_track("ugNnRayKsDHYpTIipboSihcuKl");
+</script>
+		</div>
+	</div>
+</body>
+</html>

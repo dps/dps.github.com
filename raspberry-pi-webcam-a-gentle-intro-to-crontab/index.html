@@ -1,0 +1,513 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Raspberry Pi webcam; a gentle intro to crontab - david singleton</title>
+	<meta name="author" content="David Singleton">
+
+	
+	<meta name="description" content="Here&#8217;s a quick and easy first project for new Raspberry Pi owners - turn your Pi into a webcam, and learn about Linux&#8217;s ability to run &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="david singleton" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://dps.github.com/raspberry-pi-webcam-a-gentle-intro-to-crontab/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><!-- <div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div> -->
+<h1><a href="/">david singleton</a></h1>
+<p class="subtitle">Flurries of latent creativity</p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/mobiletcp">Why mobile apps suck when you're mobile</a></li>
+	<li><a href="/nnrccar">How I built a self-driving (RC) car and you can too</a></li>
+	<li><a href="/kindle">HowTo: Kindle real book case</a></li>
+	<li><a href="/sudoku">Shortest Sudoku</a></li>
+	<li>&nbsp;</li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li>&nbsp;</li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/117098976115661643090?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/dps" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dps" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div id="banner" class="inner">
+        <div>
+          <a href=""><img src="/images/header.jpg" /></a>
+        </div>
+
+</div>
+
+
+
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Raspberry Pi Webcam; a Gentle Intro to Crontab</h1>
+	<div class="entry-content"><p><img class="alignright" src="/static/images/webcam.jpg">
+Here&#8217;s a quick and easy first project for new <a href="http://www.raspberrypi.org/">Raspberry Pi</a> owners - turn your Pi into a webcam, and learn about Linux&#8217;s ability to run repeated tasks at scheduled intervals with the <code>cron</code> utility.</p>
+
+<p>These instructions work with <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro">Adafruit&#8217;s Occidentalis</a> distribution for Raspberry Pi.  They likely also work with any version of the Raspian distro, but I highly recommend Occidentalis if you&#8217;d like to do more hardware hacking with your Pi.  Adafruit have good <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/occidentalis-v0-dot-2">instructions on how to get started</a> and install on an sd card.</p>
+
+<p>You will need to set up a wired or wireless internet connection to your Pi.</p>
+
+<p><img class="alignright" src="http://ws.assoc-amazon.com/widgets/q?_encoding=UTF8&Format=_SL110_&ASIN=B000RZQZM0&MarketPlace=US&ID=AsinImage&WS=1&tag=creativeflurr-20&ServiceVersion=20070822" title="Logitech Pro 9000" ></p>
+
+<h2>Choose a webcam</h2>
+
+<p>If you have a USB webcam lying around the house it&#8217;s very likely that it will work just fine.  If not, I used the <a href="http://www.amazon.com/gp/product/B000RZQZM0/ref=as_li_ss_tl?ie=UTF8&tag=creativeflurr-20&linkCode=as2&camp=1789&creative=390957&creativeASIN=B000RZQZM0">Logitech Pro 9000</a><img src="http://www.assoc-amazon.com/e/ir?t=creativeflurr-20&l=as2&o=1&a=B000RZQZM0" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> successfully and a <a href="http://www.ideasonboard.org/uvc/">full compatibility list</a> is available to check before you buy one.</p>
+
+<h2>Install fswebcam</h2>
+
+<p><code>fswebcam</code> is a small and simple webcam app for *nix.  Install it by issuing the following command on your Pi</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install fswebcam</span></code></pre></td></tr></table></div></figure>
+
+
+<!-- more -->
+
+
+<p>If all is well, you will see something like the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>The following NEW packages will be installed:
+</span><span class='line'>  fswebcam
+</span><span class='line'>0 upgraded, 1 newly installed, 0 to remove and 135 not upgraded.
+</span><span class='line'>Need to get 44.2kB of archives.
+</span><span class='line'>After this operation, 139kB of additional disk space will be used.
+</span><span class='line'>Fetched 44.2kB in 0s (1,181kB/s)  
+</span><span class='line'>Selecting previously deselected package fswebcam.
+</span><span class='line'>Unpacking fswebcam (from .../fswebcam_20091224-1_i386.deb) ...
+</span><span class='line'>Processing triggers for man-db ...
+</span><span class='line'>Setting up fswebcam ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s take a look at the help page for <code>fswebcam</code> (edited to some of the parameters we care about)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ fswebcam --help</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Usage: fswebcam [&lt;options&gt;] &lt;filename&gt; [[&lt;options&gt;] &lt;filename&gt; ... ]
+</span><span class='line'>
+</span><span class='line'> Options:
+</span><span class='line'>
+</span><span class='line'> -?, --help                   Display this help page and exit.
+</span><span class='line'>...
+</span><span class='line'> -d, --device &lt;name&gt;          Sets the source to use.
+</span><span class='line'> -r, --resolution &lt;size&gt;      Sets the capture resolution.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With the webcam plugged in, we can take a photo and save it to the file <code>webcam.jpg</code> by issuing the command:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ fswebcam -r 960x720 -d /dev/video0 webcam.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(960x720 is one of the higher supported resolutions of my camera, yours may differ.  <code>/dev/video0</code> is where my camera appears by default when I plug it in.)</p>
+
+<p>Here&#8217;s what my full resolution image looked like:</p>
+
+<p><img src="/static/images/webcam_960.jpg" alt="960x720 image from my webcam, taken with the Pi" /></p>
+
+<h2>A quick intro to <code>cron</code></h2>
+
+<p><code>fswebcam</code> has native support to keep taking photos repeatedly in a loop (check out <code>man fswebcam</code> and look for &#8216;loop&#8217;), but this is a great opportunity to explore Unix&#8217;s <code>cron</code> utility which is one of the simple but powerful unix tools that every hacker should have in his arsenal.  As explained in more detail on the <a href="http://en.wikipedia.org/wiki/Cron">wikipedia page for cron</a>, unix systems running <code>cron</code> periodically read a set of cron table files and take care of any tasks which have fallen due.  To edit the cron table we must use a command called <code>crontab</code>.</p>
+
+<p>You can view the cron table for the current user by issuing the command <code>crontab -l</code> - if you haven&#8217;t set one up already, this will show:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -l
+</span><span class='line'>no crontab for pi</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The table is empty.  But let&#8217;s take a look at the output from the server machine which hosts this blog:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -l
+</span><span class='line'># m h  dom mon dow   command
+</span><span class='line'>25 6 * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&#8217;s more interesting - the administrator of this machine has added an entry to run a script called <code>rotate-logs.sh</code>, but what do the other fields mean?  The first line of this crontab is a comment (comment lines start with #) which might help explain.  This comment is inserted by <code>crontab</code> when you first start editing the table.</p>
+
+<p>Now you might be able to guess what the meaning of the numbers on the second row are?</p>
+
+<p>They are values, separated by spaces which define when to run the specified command.</p>
+
+<p><code>m</code> = minute past the hour, <code>h</code> = hour of the day, <code>dom</code> = day of the month, <code>mon</code> = month [of the year] and <code>dow</code> = day of week.  <code>cron</code> expects to find these fields separated by spaces and with <code>*</code>(star) to mean &#8220;any value&#8221; so in our example</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>25 6 * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>cron</code> will read the file and any time that the minute of the hour is 25 and the hour of the day is 6, on any day of the month etc. <code>./rotate-logs.sh</code> will be run.  As you have probably figured out, this has the effect of running the command once a day at 6:25am.</p>
+
+<p>You now know how to set up <code>cron</code> to run tasks at specified times of the day.  Let&#8217;s say we want to update our webcam image every 15 minutes.  Doing that neatly requires some advanced <code>cron</code> syntax.  In addition to setting individual minutes, hours etc we can also provide a list of values so</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0,15,30,45 * * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>would cause the rotate-logs.sh script to be run every 15 mins.  That&#8217;s still a little long winded, so how about:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*/15 * * * * ./rotate-logs.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>*/15</code> means &#8220;every 15 minutes&#8221;.  The syntax works for any of the fields, so we can have</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>* */2 * * * ./foo # every two hours
+</span><span class='line'>* * */5 * * ./foo # every five days</span></code></pre></td></tr></table></div></figure>
+
+
+<p>etc.</p>
+
+<p>OK, now you know <code>cron</code>, let&#8217;s bring it all back together and make our actual webcam take a photo every 15 minutes.</p>
+
+<h2>Use cron to take an image repeatedly</h2>
+
+<p>Recall that we ran the command <code>fswebcam -r 960x720 -d /dev/video0 webcam.jpg</code> to take a photo from the webcam.  Let&#8217;s set up the <code>pi</code> user&#8217;s crontab to do that every 15 mins.</p>
+
+<p>At the command line, type</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -e</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You should see a message to note that a new table is being created and end up in an editor with a blank file containing only the comment</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># m h  dom mon dow   command</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Use your new-found <code>cron</code>-fu to add</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*/15 * * * * fswebcam -r 960x720 -d /dev/video0 /home/pi/webcam.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here you&#8217;ll note that I&#8217;ve added a fully qualified path for <code>/home/pi/webcam.jpg</code> - although <code>cron</code> runs tasks with the working directory as the user&#8217;s home directory, it&#8217;s good practice to use full path names in scripts where you may not be certain of the working directory context.</p>
+
+<p>Now save the file (if your editor is the default <code>nano</code>, press control-X) and you&#8217;ll see</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ crontab -e
+</span><span class='line'>crontab: installing new crontab
+</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Viola!  Your webcam is now saving that file every 15 mins.  If you want to check it&#8217;s working correctly at this point, try running <code>ls -l webcam.jpg</code> now and after a 15 min delay to check that the file&#8217;s timestamp has updated:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -l webcam.jpg 
+</span><span class='line'>-rw-r--r-- 1 pi pi 348450 2012-12-18 02:00 webcam.jpg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also navigate to the URL <a href="file:///home/pi/webcam.jpg">file:///home/pi/webcam.jpg</a> in the web browser on the Pi to view the image.</p>
+
+<h2>Let the world see</h2>
+
+<p>A webcam which updates a file only you can see is not particularly useful, let&#8217;s fix that!  You have a few options for serving your webcam images.</p>
+
+<h3>raspberry pi webserver</h3>
+
+<p>You could simply run a webserver locally on the Pi:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd
+</span><span class='line'>$ python -m SimpleHTTPServer &
+</span><span class='line'>Serving HTTP on 0.0.0.0 port 8000 ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Will run a simple webserver in the pi user&#8217;s home directory and other machines on your network should now be able to see your webcam by visiting <a href="http://raspberrypi.local:8000/webcam.jpg">http://raspberrypi.local:8000/webcam.jpg</a>.  Note: this link relies on the <a href="http://en.wikipedia.org/wiki/Bonjour">Bonjour</a> support in the Occidentalis distro, you might have to type the Pi&#8217;s IP address instead.</p>
+
+<p>If you have a regular home internet connection, you will probably need to set up port forwarding on your router to make that webserver accessible to the outside world, rather than just your own home network, which is a bit of a drag (and instructions depend on your router, though there are a few <a href="https://www.google.com/search?q=raspberry+pi+webserver+router+port+forwarding">attempts at tutorials to be found</a>), so let&#8217;s look at how to use a webserver on the open internet.</p>
+
+<h3>webserver with ssh/scp access</h3>
+
+<p>If you have access to a webserver (e.g. <a href="http://www.linode.com/">linode</a> ) which allows you to connect via <code>ssh</code>, you can <a href="http://osxdaily.com/2012/05/25/how-to-set-up-a-password-less-ssh-login/">set up passwordless ssh</a> and add <code>;scp webcam.jpg your-server:/path/to/web/content</code> to the end of your crontab command to have cron upload the resulting image to your server after every snapshot. e.g.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*/15 * * * * fswebcam -r 960x720 -d /dev/video0 /home/pi/webcam.jpg;scp /home/pi/webcam.jpg linode:/var/www</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Advanced: use github pages (free)</h3>
+
+<p>The set up is a little involved, but this option is free.  The wonderful source control hosting service <a href="http://github.com">github</a> will host web content for you on their servers.  First, install <code>git</code> on your Raspberry Pi:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, if you don&#8217;t have one, create an account with <a href="http://github.com">github</a> and set up <a href="https://help.github.com/articles/generating-ssh-keys">shared ssh keys as described in this article</a>.  <code>pbcopy</code> may not work on the Pi, so when you get to that step do <code>cat ~/.ssh/id_rsa.pub</code> and copy the resulting output to the clipboard manually - you&#8217;ll need to use the web browser on the pi itself to complete the following step, or transfer that file to the computer you are working on somehow.</p>
+
+<p>Next, create a new github repository named <code>username.github.com</code> where username is the github username you just created (or your existing account).  Any files you push to this repository will automatically be served on http://username.github.com.  For the examples below, <code>flexobot</code> is my username - change it to your own.</p>
+
+<p>Let&#8217;s push the webcam image to github once to see how it all works.  On your Raspberry Pi, run the following commands:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd
+</span><span class='line'>$ git clone git@github.com:flexobot/flexobot.github.com.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>replacing <code>flexobot</code> with your user name, of course.
+You should see:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:flexobot/flexobot.github.com.git
+</span><span class='line'>Initialized empty Git repository in /home/pi/flexobot.github.com/.git/
+</span><span class='line'>remote: Counting objects: 3, done.
+</span><span class='line'>remote: Total 3 (delta 0), reused 0 (delta 0)
+</span><span class='line'>Receiving objects: 100% (3/3), done.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now run the following</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cp webcam.jpg flexobot.github.com/
+</span><span class='line'>$ cd flexobot.github.com/
+</span><span class='line'>$ git add .
+</span><span class='line'>$ git commit -a -m `date +%s`
+</span><span class='line'>$ git push origin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which copies the webcam image into the copy of the github repository on your Raspberry Pi, adds and commits the changed files and pushes them to github.  If things worked correctly, you&#8217;ll see</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Counting objects: 4, done.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% (3/3), done.
+</span><span class='line'>Writing objects: 100% (3/3), 320.74 KiB, done.
+</span><span class='line'>Total 3 (delta 0), reused 0 (delta 0)
+</span><span class='line'>To git@github.com:flexobot/flexobot.github.com.git
+</span><span class='line'>   a961da0..6909423  master -&gt; master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And navigating to the url <a href="http://flexobot.github.com/webcam.jpg">http://flexobot.github.com/webcam.jpg</a> will display your latest webcam image!  Note: github pages can take 15 mins or so to update on your first push, but it&#8217;s faster after that.</p>
+
+<p>Now, let&#8217;s automate that procedure every 15 mins.  We could simply copy all those commands to the end of the <code>crontab</code> entry, but that&#8217;s a little unwieldy, so let&#8217;s write a shell script to package it all up.</p>
+
+<figure class='code'><figcaption><span> (webcam.sh)</span> <a href='/downloads/code/webcam.sh'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nv">GITUSER</span><span class="o">=</span><span class="s2">&quot;flexobot&quot;</span>
+</span><span class='line'>
+</span><span class='line'>fswebcam -r 960x720 -d /dev/video0 /home/pi/webcam.jpg
+</span><span class='line'>cp /home/pi/webcam.jpg /home/pi/<span class="nv">$GITUSER</span>.github.com/
+</span><span class='line'><span class="nb">cd</span> /home/pi/<span class="nv">$GITUSER</span>.github.com/
+</span><span class='line'>git add .
+</span><span class='line'>git commit -a -m <span class="sb">`</span>date +%s<span class="sb">`</span>
+</span><span class='line'>git push origin
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save this file as <code>webcam.sh</code> in <code>/home/pi</code> - note that it automates both steps of taking an image and pushing it to github.  You&#8217;ll need to mark the file executable by the system.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chmod +x webcam.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&#8217;s test it out manually to check it works:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./webcam.sh
+</span><span class='line'>--- Opening /dev/video0...
+</span><span class='line'>[master 8347ca2] 1356652754
+</span><span class='line'> 1 files changed, 0 insertions(+), 0 deletions(-)
+</span><span class='line'>Counting objects: 5, done.
+</span><span class='line'>Delta compression using up to 4 threads.
+</span><span class='line'>Compressing objects: 100% (3/3), done.
+</span><span class='line'>Writing objects: 100% (3/3), 323 bytes, done.
+</span><span class='line'>Total 3 (delta 1), reused 0 (delta 0)
+</span><span class='line'>To git@github.com:flexobot/flexobot.github.com.git
+</span><span class='line'>   6909423..8347ca2  master -&gt; master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can simply update the crontab to run this script instead of <code>fswebcam</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>crontab -e
+</span><span class='line'>...
+</span><span class='line'>*/15 * * * * /home/pi/webcam.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hurrah!  You&#8217;ve now learnt how to take photos with a USB webcam connected to a Raspberry Pi, some simple and advanced syntax for <code>cron</code> and <code>crontab</code> and how to push files to a webserver or github.</p>
+
+<p>(Advanced) Exercise for the reader: it should also be possible to host your webcam image on <a href="http://dropbox.com">Dropbox</a> by building their <a href="https://www.dropbox.com/help/247/en">linux daemon</a> from source code for the Raspberry Pi (the binaries they provide are not suitable for the ARM processor on the Pi).  Please <a href="mailto:davidsingleton%20at%20gmail.com">drop me a note</a> if you manage to do this successfully, I&#8217;ll give it a try in the New Year.</p>
+
+<p>Please leave any comments on <a href="https://plus.google.com/u/0/117098976115661643090/posts/C2FUa7hU5XU">this Google Plus post</a>.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2015
+
+    David Singleton
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+<script type="text/javascript" src="http://webalert.davidsingleton.org/static/track.js"></script>
+<script type="text/javascript">
+_wa_track("ugNnRayKsDHYpTIipboSihcuKl");
+</script>
+		</div>
+	</div>
+</body>
+</html>

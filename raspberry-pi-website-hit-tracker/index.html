@@ -1,0 +1,293 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Raspberry Pi Website Hit Tracker - david singleton</title>
+	<meta name="author" content="David Singleton">
+
+	
+	<meta name="description" content="You just made a funky neon sign flash in my living room. How? I have just completed my latest project which is a neon lamp which lights up every time &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="david singleton" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://dps.github.com/raspberry-pi-website-hit-tracker/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><!-- <div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div> -->
+<h1><a href="/">david singleton</a></h1>
+<p class="subtitle">Flurries of latent creativity</p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/mobiletcp">Why mobile apps suck when you're mobile</a></li>
+	<li><a href="/nnrccar">How I built a self-driving (RC) car and you can too</a></li>
+	<li><a href="/kindle">HowTo: Kindle real book case</a></li>
+	<li><a href="/sudoku">Shortest Sudoku</a></li>
+	<li>&nbsp;</li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li>&nbsp;</li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/117098976115661643090?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/dps" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dps" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div id="banner" class="inner">
+        <div>
+          <a href=""><img src="/images/header.jpg" /></a>
+        </div>
+
+</div>
+
+
+
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Raspberry Pi Website Hit Tracker</h1>
+	<div class="entry-content"><p>You just made a funky neon sign flash in my living room.</p>
+
+<p>How?  I have just completed my latest project which is a neon lamp which lights up every time someone visits my website.  It&#8217;s controlled by a little relay board I built out on an <a href="http://adafruit.com/products/1148">Adafruit permaproto board</a> and connected to a <a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14421&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14421%26scode%3DGS401%26CAWELAID%3D1599056700&usg=AFHzDLsOgsCYMI_KRBudg9V-cbzxD_5s2Q&pubid=21000000000379947">Raspberry Pi</a>.  The Raspberry Pi is running a simple python script which generates an event every time someone loads this page.  I&#8217;ve made the part which integrates with the website open for anyone to use so you can build this out for yourself - have fun!</p>
+
+<div><span><img src="/static/relay.png"/></span><span><iframe width="560" height="315" src="http://www.youtube.com/embed/N1B0BHk9FL4?rel=0" frameborder="0" allowfullscreen></iframe></iframe></span></div>
+
+
+<h2>Building the Relay Board</h2>
+
+<p>The relay board connects to the Raspberry Pi General Purpose I/O (GPIO) pins via a ribbon cable.  Adafruit sells a <a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14389&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14389%26scode%3DGS401%26CAWELAID%3D1562166096&usg=AFHzDLv2-yk0flf9LYQoeR18YHLcWv3vvw&pubid=21000000000379947">Pi Cobbler</a> which makes it easy to break out the GPIO pins on a breadboard for prototyping.  Once you&#8217;re happy that the prototype is working, transferring a breadboard layout to the <a href="http://adafruit.com/products/1148">permaproto</a> board is quite simple (the soldering is easy and you just copy what you had on the breadboard).</p>
+
+<p><img src="/static/circuit.png"/><br/></p>
+
+<p>Here is the circuit diagram for the relay board - we drive the relay coil from the 5V supply which is switched on and off using a transistor controlled by one of the digital out pins (I used pin 18).  The diode prevents reverse voltage as the relay switches off from damaging the Pi.</p>
+
+<p>You can see step-by-step instructions on how to assemble the relay board on <a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1">this spark</a>.<br/><center>
+<a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1"><img src="/static/spark.png" width="80%"/></a></center></p>
+
+<h2><a href="https://www.sharpenapp.com/spark/dps/raspberry-pi-relay-board-1">Spark: Raspberry Pi relay board.</a></h2>
+
+
+<!-- more -->
+
+
+<h2>Connecting the lamp</h2>
+
+<p>You can use any lamp or electronic device powered with a low direct current (anything which plugs in to a USB port or runs on batteries is ideal).  DO NOT attempt to use a mains powered lamp.  Even if your relays is rated for 110V, the prototyping board has exposed connections and mains electricity can kill.</p>
+
+<p>Simply cut one side of the power cable and attach to the switched part of the relay (I used screw terminals so I can connect and disconnect as I please).</p>
+
+<p><img src="/static/proto.png" width=100%/></p>
+
+<h2>RPi test program</h2>
+
+<p>The following little test program will drive your lamp on and off every 2 seconds to verify everything is working.</p>
+
+<p>I used the Adafruit Occidentalis distribution of Linux.  You can also use Raspbian.  Follow <a href="http://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-gpio">these instructions</a> to get the Pi set up, or use the quickstart below:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install python-rpi.gpio</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run the following Python program:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import RPi.GPIO as gpio
+</span><span class='line'>import time
+</span><span class='line'>
+</span><span class='line'>gpio.setmode(gpio.BCM)
+</span><span class='line'>gpio.setup(18, gpio.OUT)
+</span><span class='line'>while True:
+</span><span class='line'>  time.sleep(2)
+</span><span class='line'>  gpio.output(18, True)
+</span><span class='line'>  print "True"
+</span><span class='line'>  time.sleep(2)
+</span><span class='line'>  gpio.output(18, False)
+</span><span class='line'>  print "False"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each time False is printed, the lamp should turn on and off again when True is printed.</p>
+
+<h2>Set up your website</h2>
+
+<p>This bit is easy.  Visit <a href="http://webalert.davidsingleton.org/">http://webalert.davidsingleton.org/</a>, register your web page(s) and follow the instructions to add code to your web page.</p>
+
+<center><a href="http://webalert.davidsingleton.org/"><img src="/static/webalert.png" style="border: 1px solid #ccc;"/></a></center>
+
+
+<p>What does webalert do?  It&#8217;s a simple service hosted on Heroku which serves up a javascript script which adds a 1 pixel, transparent, image to your webpage with a unique URL.  When the visitor&#8217;s web browser loads that image, the service sees the event and publishes a message to a Redis pubsub queue which the Raspberry Pi listens to.  You don&#8217;t need to write or install this, you can simply reuse mine.</p>
+
+<center><a href="http://webalert.davidsingleton.org/"><img src="/static/waflow.png" style="border: 1px solid #ccc;"/></a></center>
+
+
+<h2>Run the client on your Pi</h2>
+
+<p>The webalert client uses <code>redis</code> to subscribe to events generated each time your website is loaded.  First, install the redis python module:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo pip install redis</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, in a new directory, get the webalert code:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/dps/webalert.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And write a simple client which uses it - e.g.:</p>
+
+<script src="https://gist.github.com/dps/4712899.js"></script>
+
+
+<p>Finally, run passing your webalert client token on the command line:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo python weblight.py [your token]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ta da!  clickety click flashy flash, your website in your living room.</p>
+
+<p>Comments? Join the <a href="http://news.ycombinator.com/item?id=5176648">discussion</a> on Hacker News.</p>
+
+<br/><br/>
+
+
+<hr/>
+
+
+<br/>
+
+
+<p>Want to get started with RPi + electronics yourself?  Here&#8217;s some stuff to buy (affiliates links, but the kits and prices are good).</p>
+
+<table><tr><td><center>
+<a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14421&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14421%26scode%3DGS401%26CAWELAID%3D1599056700&usg=AFHzDLsOgsCYMI_KRBudg9V-cbzxD_5s2Q&pubid=21000000000379947">
+<b>512MB Raspberry Pi Project Board Model B</b>
+<br/>
+<img src="http://www.mcmelectronics.com/content/productimages/s4/83-14421.jpg" width="240px"/></a></center></td><td>&nbsp;</td><td><center>
+
+<a href="http://gan.doubleclick.net/gan_click?lid=41000613802463368&pid=83-14385&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-14385%26scode%3DGS401%26CAWELAID%3D1562166092&usg=AFHzDLtTF5zhVmSUuM4la4iPzMpIsTHYlg&pubid=21000000000379947">
+<img src="http://www.mcmelectronics.com/content/productimages/s4/83-14385.jpg" width="240px"/>
+<br/>
+<b>Adafruit 955 Raspberry Pi (Electronics) Starter Project Kit</b>
+</a></center></td></tr></table>
+
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2015
+
+    David Singleton
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+<script type="text/javascript" src="http://webalert.davidsingleton.org/static/track.js"></script>
+<script type="text/javascript">
+_wa_track("ugNnRayKsDHYpTIipboSihcuKl");
+</script>
+		</div>
+	</div>
+</body>
+</html>

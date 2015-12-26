@@ -1,0 +1,278 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Introducing PiUi: add a simple mobile phone UI to your RaspberryPi project. - david singleton</title>
+	<meta name="author" content="David Singleton">
+
+	
+	<meta name="description" content="I&#8217;m excited to introduce you to a project I have been working on for a few weeks in my spare time: PiUi. A lot of folks asked how to use my &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="" rel="alternate" title="david singleton" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://dps.github.com/introducing-piui/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+	
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><!-- <div class="profilepic">	
+	<img src="/images/dp.jpg" alt="Profile Picture" style="width: 160px;">
+</div> -->
+<h1><a href="/">david singleton</a></h1>
+<p class="subtitle">Flurries of latent creativity</p>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/mobiletcp">Why mobile apps suck when you're mobile</a></li>
+	<li><a href="/nnrccar">How I built a self-driving (RC) car and you can too</a></li>
+	<li><a href="/kindle">HowTo: Kindle real book case</a></li>
+	<li><a href="/sudoku">Shortest Sudoku</a></li>
+	<li>&nbsp;</li>
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li>&nbsp;</li>
+</ul>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		<a class="google" href="https://plus.google.com/117098976115661643090?rel=author" title="Google+">Google+</a>
+		
+		
+		<a class="twitter" href="http://twitter.com/dps" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/dps" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+	</div>
+</nav>
+
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			<div id="banner" class="inner">
+        <div>
+          <a href=""><img src="/images/header.jpg" /></a>
+        </div>
+
+</div>
+
+
+
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post">
+	<h1 class="title">Introducing PiUi: Add a Simple Mobile Phone UI to Your RaspberryPi Project.</h1>
+	<div class="entry-content"><p><a href="http://github.com/dps/piui"><img src="https://raw.github.com/dps/piui/master/android/res/drawable-xhdpi/ic_launcher.png"/></a></p>
+
+<p>I&#8217;m excited to introduce you to a project I have been working on for a few weeks in my spare time: <b><a href="http://github.com/dps/piui">PiUi</a></b>.</p>
+
+<iframe width="853" height="480" src="http://www.youtube.com/embed/2ay0vuW6aNY?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+<p>A lot of folks asked how to use my <a href="http://blog.davidsingleton.org/raspberry-pi-timelapse-controller/">RPi Timelapse Controller</a> without the LCD Plate - which is kindof expensive and not everyone is comfortable to solder one up themselves.  The answer of course is that this is possible, but&#8230;  without a UI you are limited to having the controller run on boot and it&#8217;s difficult to know everything&#8217;s working correctly and/or take control when you know better.</p>
+
+<p>The same is true of many hardware projects and an HDMI monitor + keyboard is not a feasible method of interaction away from your desk - wouldn&#8217;t it be great if you could add a UI on a device you already have in your pocket to any Raspberry Pi project?</p>
+
+<p>PiUi makes it easy to implement a rich mobile UI directly in python code and access it from your Android or iPhone.  It&#8217;s powered by <a href="http://maker.github.com/ratchet/">ratchet.js</a> so there are lots of UI components available to create beautiful interfaces.</p>
+
+<p>All you need in addition to a Raspberry Pi is a wifi adaptor (like <a href="https://www.adafruit.com/products/814">this one</a> from Adafruit).  Your Pi will create a wifi access point to connect your phone to, then simply navigate to <b>http://piui/</b> in a browser to access your app&#8217;s UI.  There&#8217;s even an <a href="https://play.google.com/store/apps/details?id=org.davidsingleton.piui">Android app</a> to make connecting easy and show useful status info plus an iPhone webapp you can save to your homescreen.</p>
+
+<p>Once the access point is set up (easy with pre-prepared <a href="https://github.com/dps/piui-sdcards">sd card images</a>), the full code required for a python helloworld example is:</p>
+
+<h2>Install</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo pip install piui</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>HelloWorld</h2>
+
+<script src="https://gist.github.com/dps/5210265.js"></script>
+
+
+<h2>Result</h2>
+
+<p><img src="/images/helloworld.png" /></p>
+
+<p>PiUi is open source - <a href="http://www.github.com/dps/piui">fork it on github</a> - and is just getting started, so please use it, let me know what you think and help improve it.</p>
+
+<p>For detailed setup instructions, read on.</p>
+
+<p>Here&#8217;s a little demo of the Timelapse project with a PiUi interface (source at <a href="http://github.com/dps/piui-timelapse">github.com/dps/piui-timelapse</a>)</p>
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/85POjhakf4U?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+
+
+<!-- more -->
+
+
+<h1>Setup Instructions</h1>
+
+<h2>The easy way (using a pre-prepared SD card image)</h2>
+
+<p>Download the <code>piui_plus_examples.zip</code> file from <a href="https://github.com/dps/piui-sdcards/blob/master/piui_plus_examples.zip?raw=true">github.com/dps/piui-sdcards</a>.  Unzip it and you&#8217;ll find a 4Gb sd card image named <code>piui_plus_examples.img</code>.  Write it to an SD card by following the <a href="http://elinux.org/RPi_Easy_SD_Card_Setup">usual Raspberry Pi instructions</a>.  At present, this image is based on Occidentalis 0.2.</p>
+
+<p>Assuming you have the same wifi adapter I do, this will work out of the box.  If not, read the <a href="http://www.pi-point.co.uk/">Pi-Point</a> docs to configure for your own hardware.</p>
+
+<p>On first boot, you can sync the latest piui source with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd piui
+</span><span class='line'>git pull origin</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and start the demo app with:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>python piui_demo.py</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Viola!  PiUi nirvana.</p>
+
+<h2>The do-it-yourself way</h2>
+
+<p>Start with the latest release of <a href="http://www.raspberrypi.org/downloads">Raspbian</a> or (better as it&#8217;s ready for hardware projects) <a href="http://learn.adafruit.com/adafruit-raspberry-pi-educational-linux-distro/occidentalis-v0-dot-2">Occidentalis</a>.</p>
+
+<p>Follow the <a href="http://www.pi-point.co.uk/">Pi-Point documentation</a> to turn your Pi into a wifi access point.  Note that if you use the <a href="https://www.adafruit.com/products/814">Adafruit wifi adapter</a>, these instructions do not work in full as the <code>nl80211</code> driver does not support that device (which uses a Realtek chipset).  <a href="http://blog.sip2serve.com/post/38010690418/raspberry-pi-access-point-using-rtl8192cu">This blog post</a> explains how to make it work - thanks Paul!</p>
+
+<p>Add an entry to <code>/etc/hosts</code> mapping the DNS name <code>piui</code> to the address you configured for the Pi in the step above.  Assuming it&#8217;s <code>192.168.1.1</code>, then you should add the following to <code>/etc/hosts</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>192.168.1.1     piui</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Install <code>nginx</code> - nginx is an HTTP server and reverse proxy, we use it to multiplex requests to your app and the <code>piui-supervisor</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install nginx</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Configure nginx using the <a href="https://github.com/dps/piui/blob/master/nginx-conf/nginx.conf">config file</a> in the PiUi github repo - copy this to <code>/etc/nginx/nginx.conf</code> and restart nginx.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /etc/init.d/nginx restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Get the piui source code from github</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /home/pi
+</span><span class='line'>git clone https://github.com/dps/piui.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Arrange for the <code>piui-supervisor</code> to run on boot.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo cp /home/pi/piui/supervisor/piui-supervisor /etc/init.d
+</span><span class='line'>sudo update-rc.d piui-supervisor defaults</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Done!  Run the demo app:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd piui
+</span><span class='line'>python piui_demo.py</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Connect your phone to the wifi AP and navigate to &#8216;http://piui/&#8217;.</p>
+
+<p>Questions, ideas?  <a href="https://news.ycombinator.com/item?id=5432615">Join the discussion on Hacker News</a></p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner">Copyright &copy; 2015
+
+    David Singleton
+
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-697655-9']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+<script type="text/javascript" src="http://webalert.davidsingleton.org/static/track.js"></script>
+<script type="text/javascript">
+_wa_track("ugNnRayKsDHYpTIipboSihcuKl");
+</script>
+		</div>
+	</div>
+</body>
+</html>

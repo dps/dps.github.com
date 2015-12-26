@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>How I built a self-driving (RC) car and you can too.</title>
+<style>
+body {
+  background-color: #f0f0f0;
+  margin: 0px;
+  font-family: sans-serif;
+}
+.main {
+  width: 1100px;
+  padding-top: 30px;
+  padding-left: 80px;
+  padding-right: 80px;
+  padding-bottom: 40px;
+  background-color: white;
+  margin-left:auto;
+  margin-right:auto;
+}
+p {
+  line-height: 150%;
+}
+</style>
+</head>
+<body>
+<div style="position: fixed; top: 10; left: 10;"><a href="http://blog.davidsingleton.org/">&larr; back to blog.davidsingleton.org</a></div>
+<div class="main">
+<a href="https://github.com/dps/nnrccar"><img src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" style="position: fixed; right: 0; top: 0;"></a>
+<h1>How I built a neural network controlled self-driving (RC) car!</h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-via="dps" data-lang="en">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script><br/><!-- Place this tag where you want the +1 button to render -->
+<g:plusone annotation="inline"></g:plusone>
+
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<p><b>Updated January 11th 2013</b>: <a href="http://vimeo.com/46432806">Watch my BACON talk on this project on vimeo</a>.</p>
+<p><b>Updated January 2nd 2012</b>: the source code is now open source and available on github.</p>
+<p>Recently, I have been refreshing my knowledge of Machine Learning by taking <a href="http://www.cs.stanford.edu/people/ang/">Andrew Ng</a>'s excellent Stanford <a href="http://www.ml-class.org/">Machine Learning course</a> online.  The lecture module on <a href="http://en.wikipedia.org/wiki/Neural_network">Neural Networks</a> ends with an intriging motivating <a href="http://academicearth.org/lectures/supervised-learning-autonomous-deriving">video</a> of the <a href="http://ftp.utcluj.ro/pub/docs/imaging/Autonomous_driving/Articole%20sortate/CThorpe/ALVINN%20Project%20Home%20Page.htm">ALVINN</a> autonomous car driving itself along normal roads at <a href="http://www.ri.cmu.edu/research_project_detail.html?project_id=160&menu_id=261">CMU</a> in the mid 90s.</p>
+<p>I was inspired by this video to see what I could build myself over the course of a weekend.  From a <a href="https://sites.google.com/a/davidsingleton.org/www2/arduino-ps2-mouse-controlled-rc-car">previous project</a> I already had a <a href="http://www.amazon.co.uk/gp/product/B003TO3OCA/ref=as_li_ss_tl?ie=UTF8&tag=flurroflatenc-21&linkCode=as2&camp=1634&creative=19450&creativeASIN=B003TO3OCA">cheap radio controlled car</a><img src="http://www.assoc-amazon.co.uk/e/ir?t=flurroflatenc-21&l=as2&o=2&a=B003TO3OCA" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> which I set about trying to control.</p>
+<p>
+<center>
+<img src="/static/car.png" style="padding-right: 64px;"/>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/DWNtsS2kZWs" frameborder="0" allowfullscreen></iframe>
+</center>
+</p>
+<br/>
+<p>The ALVINN system captures video frames every couple of seconds and passes them to a (series of) neural networks which have been trained by watching a human drive in similar environments.  The trained neural network can then be passed live video frames and will predict how to steer to stay on the road ahead!  I figured I'd do the same with my scaled down version.  I needed a system which could operate in two modes:</p>
+<p>
+<ul><li><b>Record</b> &mdash; The system captures video frames and the control input from a human driver (me!) and records them for later use to train the neural network.
+<li><b>Drive</b> &mdash; Captures live video frames, passes them to a trained neural network which makes predictions about how to drive/steer which are sent to the car by radio control - hey presto, a self driving car!
+</ul>
+</p>
+<h3>Design</h3>
+<p>The system should be able to record video from the car, pass frames to a neural network and control the car's steering / motors.  The &quot;obvious&quot; way to do this might be to mount an Android phone on the car, gathering video frames and making neural network predictions locally on the device, hacking the car to be controlled from the onboard phone using an Arduino based <a href="http://developer.android.com/guide/topics/usb/adk.html">Android ADK</a> board, with data recorded and transferred to a computer for training.</p><p>  Unfortunately, ADK boards require enough juice to keep the phone powered over USB and the weight of additional batteries would make this cheap and cheerful car struggle.  Instead, I opted for a design which barely modified any of the components involved:</p>
+<img src="/static/NNRCCar.png" style="background-color:white;"/><br/>
+<center><font size=-1>Anatomy of a self-driving RC car</font></center>
+<div>
+<p><div style="float: right;"><img src="/static/driver.png"/><br/><center><font size=-1>Driver app running on Mac OS X</font></center></div>The system consists of:
+<ul>
+<li><b>Android phone</b> &mdash; mounted on the car, captures video frames of the road ahead using its built-in camera at ~15 fps.  An app running on the phone connects to a server running on a laptop computer via wifi and streams 176x144 grayscale video frames across the connection.<br/><br/>
+<li><b>Computer</b> &mdash; runs a little Java app called &quot;Driver&quot; which acts as both a TCP server, receiving streamed image frames from the phone and a user interface allowing a human driver to control the car with the cursor keys or mouse.  In record mode, the video frames are saved to disk, labelled with the current control input coming from the human driver.  The neural network is trained using these labelled frames in a separate environment on the computer.  Trained parameters are saved out to files which are in turn read by the Driver app... which in <i>auto</i> mode can feed incoming video frames directly to the neural network and steer according to its predictions, by sending instructions over a serial interface connected to an...<br/><br/>
+<li><b><a href="http://gan.doubleclick.net/gan_click?lid=41000000022805092&pid=83-13129&adurl=http%3A%2F%2Fwww.mcmelectronics.com%2Fproduct%2F83-13129%26scode%3DGS111%26CAWELAID%3D1107843616&usg=AFHzDLs9tiqcz1x_awp5Cqrygf98Iq95ng&pubid=21000000000379947">Arduino Uno</a></b> &mdash; connected to the computer via USB and hacked to connect to and simulate keypresses on the car's radio controller PCB (as described below).
+</ul>
+</p>
+</div>
+<h3>The Neural Network</h3>
+<p>
+As on the ML course, the Neural Network is trained using an <a href="http://www.gnu.org/software/octave/">octave</a> program, and I didn't stray too far from the set up used there.  The diagram below shows the architecture of the network I used.  Here we have 25345 units in the input layer - 25344 units which are fed the brightness value of an individual pixel in the 176 x 144 video frame (176x144 was the lowest resolution the camera on my phone supported in preview mode) and a bias unit.  I chose to use 64 non-bias units in my hidden layer - this choice is fairly arbitrary, but I found that my initial choice of 256 took a pretty long time to train, and 8 units were not expressive enough to drive the car successfully.  Crucially, there are four units in the output layer - one corresponding to each of the instructions we can send the car - go forwards, backwards, left or right.
+<br/><img src="/static/NeuralNetwork.png" /><br/><br/>
+Here comes the magic - the network is trained using <a href="http://en.wikipedia.org/wiki/Backpropagation">backpropagation</a> which produces weights corresponding to the contribution each input layer unit makes to the activation of each of the hidden layer units, and the contribution each hidden layer unit makes to the activation of each of the output layer units.  There's no explicit image processing going on here - the network literally figures out what kind of patterns in the input video frames are useful in making decisions about how to drive the car, based on minimizing the numerical error between the current prediction and all of the recorded examples.  The little frame at the bottom of the diagram below is a visualization of the weights assigned to each of the pixels in the input layer as they contribute to just one of the hidden layer units - you may be able to see here that this unit corresponds to some kind of edge detection in the middle distance broadly sweeping to the left or right.
+</p>
+<p>
+To make predictions in <i>auto</i> mode, I also implemented the same network topology in Java (making use of the Apache Commons Math Library for linear algebra).  <a href="https://github.com/dps/nnrccar/blob/master/Driver/src/org/davidsingleton/nnrccar/NeuralNetwork.java">NeuralNetwork.java</a> contains the interesting code and is a generic neural net implementation you could use for any three layer network (and also contains code for parsing a RealMatrix from an octave .dat file).  To test the correctness of this implementation, <a href="https://github.com/dps/nnrccar/blob/master/Driver/src/org/davidsingleton/nnrccar/NeuralNetworkTest.java">NeuralNetworkTest.java</a> checks that the predictions from this code are virtually identical to those made with the same input data and network parameters under the octave implementation.  The Driver app uses this Java implementation, set up with network parameters loaded from files written by the octave script at the end of the training process.
+</p>
+<h3>Radio Control with Arduino</h3>
+<p>
+For a <a href="https://sites.google.com/a/davidsingleton.org/www2/arduino-ps2-mouse-controlled-rc-car">previous project</a>, I had controlled this car with a PS/2 mouse connected to an Arduino UNO.  This time, I extended that design so that commands sent over the USB / Serial interface could be sent to the car via its original controller.
+<h4>Choice of car</h4>
+<p><img src="https://sites.google.com/a/davidsingleton.org/www2/_/rsrc/1298844225966/arduino-ps2-mouse-controlled-rc-car/photo%201.JPG?height=238&width=320" style="float: right;padding: 12px;"/>
+I bought the cheapest RC car I could find - <a href="http://www.amazon.co.uk/gp/product/B003TO3OCA/ref=as_li_ss_tl?ie=UTF8&tag=flurroflatenc-21&linkCode=as2&camp=1634&creative=19450&creativeASIN=B003TO3OCA">this one</a> if you want to get the same - it cost about &pound;10. Pretty much any cheap car will do, as long as the controller is a push button on/off type rather than a continuous control.  The hack is pretty simple -  modify the radio control unit (car stays unmodified) so that instead of a human pressing the buttons, the arduino board will press them for us based on the value received over the serial port.</p>
+
+<h4>Figure out how the RC controller works</h4>
+<p>Take the RC controller apart and figure out how it works.  Expensive radio controlled cars have servo motors for steering and variable speed control on their main motor, but a cheap car like this just has on/off switches for each of forward / backward / left and right.  You can follow the tracks from each side of each switch to the nearest solder joint on the original board.  Find the pads for each switch and confirm with a multimeter that the solder joints are the correct ones - when the switch is pressed, the resistance between the two relevant joints will be zero. Once you've identified the joints that matter, attach patch wires to each point with a soldering iron.  The controller I used had a common ground (blue wire in the photo below) which the pads for up/down left/right were being connected to when the relevant switch was pressed.  In the photo, you can see that I have traced these connections back to the point where solder joints already existed and attached wires (orange, yellow, white, red).  It is a good idea to use different coloured wire for each of the directions so you can keep track of which one is which when working on a breadboard.</p>
+<img src="https://sites.google.com/a/davidsingleton.org/www2/_/rsrc/1298845456979/arduino-ps2-mouse-controlled-rc-car/photo%205.JPG?height=239&width=320" style="float: right; padding: 12px;"/>
+<p>
+Once I got it working, I chose to remove the PCB from the original controller housing altogether and instead of powering it with 2 x AA batteries, I fed it 3.3V from the Arduino board (so all power for this unit comes over USB from the computer).  To switch the connections from software running on the Arduino board, we need to build a simple circuit on a breadboard to allow an Arduino pin to drive each 'button' without being physically connected in a circuit <a href="#foot1">[1]</a> - we can use <a href="http://en.wikipedia.org/wiki/Opto-isolator">optical isolators</a> for this - the opto-isolator part I used was a 4N35.  You need to build the below circuit four times (once for each direction).  The common ground from the RC controller will be connected to pin 4 of the 4N35 and the direction switch lead you soldered on will be connected to pin 5.  The Arduino pin for turning on the controller switch for the given direction will be connected to pin 1 on the 4N35.<br/>
+<img src="https://sites.google.com/a/davidsingleton.org/www2/_/rsrc/1298847317608/arduino-ps2-mouse-controlled-rc-car/opto_schem.png"/>
+<br/>
+Fully built out on a breadboard it will look like this:<br/>
+<img src="/static/rccar_bb.png"/>
+<h4>Arduino sketch</h4>
+Finally, we need a firmware sketch to run on the Arduino board.  You can see the full source for this on <a href="https://github.com/dps/nnrccar/blob/master/arduino/serialrccar/serialrccar.pde">github</a>, but the key part is this little section in <code>loop()</code> :
+<div>
+<pre>
+ if (Serial.available() > 0) {
+    incomingByte = Serial.read();
+
+    left = right = forward = back = LOW;
+    if (incomingByte & 0x01) {
+      left = HIGH;
+    }
+    if (incomingByte & 0x02) {
+      right = HIGH;
+    }
+    if (incomingByte & 0x04) {
+      forward = HIGH;
+    }
+    if (incomingByte & 0x08) {
+      back = HIGH;
+    }
+    ...
+    digitalWrite(leftPin, left);
+    digitalWrite(rightPin, right);
+    ...
+  }
+</pre>
+Which reads a byte from the serial interface and decodes it to determine which buttons to push on the remote control which are written out as HIGH signals on the arduino output pins connected to the opt-isolators above.  You may also notice in the source that I chose to pulse the forward direction for 250 ms followed by a 500 ms pause - this was done simply because the car I used was very fast and difficult to drive round a small circuit - you might like to experiment with different values or remove this altogether if you try with a slower car.
+</div>
+</p>
+<p>
+And, putting it all together, here's another video of the car in action:<br/>
+<center>
+<iframe width="640" height="360" src="http://www.youtube.com/embed/ndSiW9Zmd6g" frameborder="0" allowfullscreen></iframe>
+</center>
+</p>
+<br/>
+<h4>You can too!</h4>
+You can build your own car - I've made the source code of the Android app, Java Driver app and octave training scripts available at <a href="http://github.com/dps/nnrccar">github.com/dps/nnrccar</a> under the BSD license.  This does not include the source for the <a href="http://www.ml-class.org/">ML class</a> exercises which you'll need to download separately as described in the <a href="https://github.com/dps/nnrccar">README</a>.<br/>
+
+<br/>
+<h4>
+<a href="https://plus.google.com/u/0/117098976115661643090/posts/DYURNKax7Bf">Comment on this article on Google+</a></h4>
+<br/>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9924635684739856";
+/* mobiletcp */
+google_ad_slot = "0631023289";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<br/>
+<h3>Notes</h3>
+<a name="foot1">[1]</a> - Since we are powering the radio controller with 3.3V from the Arduino, this is not strictly necessary, but this allows the same circuit to control devices where we cannot share power.
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-697655-9']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>
