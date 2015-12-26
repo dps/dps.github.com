@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: engmgmt | david singleton]]></title>
+  <link href="http://dps.github.com/blog/categories/engmgmt/atom.xml" rel="self"/>
+  <link href="http://dps.github.com/"/>
+  <updated>2015-12-26T21:39:20+00:00</updated>
+  <id>http://dps.github.com/</id>
+  <author>
+    <name><![CDATA[David Singleton]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Autonomy without Chaos?]]></title>
+    <link href="http://dps.github.com/autonomy-without-chaos/"/>
+    <updated>2015-10-04T21:28:00+01:00</updated>
+    <id>http://dps.github.com/autonomy-without-chaos</id>
+    <content type="html"><![CDATA[<p>On 24th Apr, my birthday! I was lucky to be invited to visit Armenia [thx @raffi] to share my perspective on organising eng teams.  The video of my talk is now available on <a href="https://www.youtube.com/watch?v=RKgZmHhSD9I">YouTube</a>.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RKgZmHhSD9I" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Slides below:</p>
+
+<iframe src="https://docs.google.com/presentation/d/1pRZN8HGNRFzcRJ5vtRaEoMJ499s12WBHct8Rp0xoEHc/embed?start=false&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -4,7 +4,7 @@
   <title><![CDATA[david singleton]]></title>
   <link href="http://dps.github.com/atom.xml" rel="self"/>
   <link href="http://dps.github.com/"/>
-  <updated>2015-12-26T21:21:14+00:00</updated>
+  <updated>2015-12-26T21:39:20+00:00</updated>
   <id>http://dps.github.com/</id>
   <author>
     <name><![CDATA[David Singleton]]></name>
@@ -31,6 +31,23 @@
 <p>It has sections for plotting charts of metrics that relate to my objectives throughout the year.  The act of plotting my progress on a chart every day and every week keeps my priorities connected to my goals.</p>
 
 <p>I&#8217;m a software person, so there are sections for wireframing, for sketching system designs and for capturing feedback.  There&#8217;s even an ASCII chart, because who knows when you might find yourself stranded on Mars with only a webcam and a pointer to communicate with earth?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Autonomy without Chaos?]]></title>
+    <link href="http://dps.github.com/autonomy-without-chaos/"/>
+    <updated>2015-10-04T21:28:00+01:00</updated>
+    <id>http://dps.github.com/autonomy-without-chaos</id>
+    <content type="html"><![CDATA[<p>On 24th Apr, my birthday! I was lucky to be invited to visit Armenia [thx @raffi] to share my perspective on organising eng teams.  The video of my talk is now available on <a href="https://www.youtube.com/watch?v=RKgZmHhSD9I">YouTube</a>.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RKgZmHhSD9I" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Slides below:</p>
+
+<iframe src="https://docs.google.com/presentation/d/1pRZN8HGNRFzcRJ5vtRaEoMJ499s12WBHct8Rp0xoEHc/embed?start=false&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
 ]]></content>
   </entry>
   
@@ -1168,18 +1185,6 @@ This graph shows the result of my weekend project - it&#8217;s the temperature i
 <p>Patrick gave me a tour of their production facilities. In addition to the local book binder, they work with a nearby workshop which employs disabled San Franciscans who build the DODOcase frames by hand and attach them to the outers made at the book binder. It was impressive to see how DODOcase is helping provide work for their local community while turning out a top-quality product.</p>
 
 <p><img src="http://cdn.shopify.com/s/files/1/0046/6182/products/dodocase-560-kindle.jpg?1294656774" alt="" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HowTo: Make a REAL BOOK Kindle cover]]></title>
-    <link href="http://dps.github.com/howto-make-a-real-book-kindle-cover/"/>
-    <updated>2011-01-03T21:25:55+00:00</updated>
-    <id>http://dps.github.com/howto-make-a-real-book-kindle-cover</id>
-    <content type="html"><![CDATA[<p>I love reading on my Kindle, but as anyone who has been using one for a while knows, it feels too delicate to drop straight into a bag and really needs a case. So, I need a case, but I want one that actually makes the Kindle look like a book - enough to make the person sitting opposite me on the tube take no notice of my fancy e-reader and prevent cabin crew bothering me to turn it &#8220;off&#8221; for take off and landing. So it&#8217;s going to need to have edges that look like pages and be book shaped&#8230; I thought, <a href="http://blog.davidsingleton.org/kindle">why not start with a real book and hack it to perfectly cradle a Kindle</a>
-<img src="https://sites.google.com/a/davidsingleton.org/www2/_/rsrc/1294086565163/kindle-real-book-case/kindle-real-book-case-2/kindle-real-book-case/photo%204.JPG?height=149&amp;width=200" alt="" /></p>
-
-<p>&#8230;and thus went my weekend.  But, after two days of hacking, I&#8217;ve written it all up <a href="http://blog.davidsingleton.org/kindle" target="_blank">here</a></p>
 ]]></content>
   </entry>
   
